@@ -4,7 +4,7 @@
 #play{
     border: 1px solid green;
     width: auto;
-    height: 210px;
+    height: 300px;
 }
 #content{
     margin-top: 20px;
@@ -21,4 +21,9 @@ ul{
     /* margin-left:20px;
     margin-right:20px; */
 
+}
+
+#carousel  img{
+    width: 100px;
+    height: 100px;;
 }
