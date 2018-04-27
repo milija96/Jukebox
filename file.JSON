@@ -1,0 +1,65 @@
+﻿[
+    {
+        "cenaKolicina": 60,
+        "id": 9,
+        "izvodjacIme": "Hladno pivo",
+        "naziv": "Pitala si me",
+        "zanrIme": "Punk"
+    },
+    {
+        "cenaKolicina": 90,
+        "id": 10,
+        "izvodjacIme": "Hladno pivo",
+        "naziv": "Pravo ja",
+        "zanrIme": "Punk"
+    },
+    {
+        "cenaKolicina": 100,
+        "id": 11,
+        "izvodjacIme": "Goblini",
+        "naziv": "Voz",
+        "zanrIme": "Punk"
+    },
+    {
+        "cenaKolicina": 80,
+        "id": 12,
+        "izvodjacIme": "Riblja corba",
+        "naziv": "Kad hodas",
+        "zanrIme": "Rock"
+    },
+    {
+        "cenaKolicina": 50,
+        "id": 13,
+        "izvodjacIme": "Riblja corba",
+        "naziv": "Amsterdam",
+        "zanrIme": "Rock"
+    },
+    {
+        "cenaKolicina": 70,
+        "id": 14,
+        "izvodjacIme": "EKV",
+        "naziv": "Srce",
+        "zanrIme": "Rock"
+    },
+    {
+        "cenaKolicina": 70,
+        "id": 15,
+        "izvodjacIme": "Miroslav Ilic",
+        "naziv": "Bozanstvena zeno",
+        "zanrIme": "Narodna"
+    },
+    {
+        "cenaKolicina": 50,
+        "id": 16,
+        "izvodjacIme": "Saban Saulic",
+        "naziv": "Sneg je opet, Snezana",
+        "zanrIme": "Narodna"
+    },
+    {
+        "cenaKolicina": 50,
+        "id": 17,
+        "izvodjacIme": "Miroslav Ilic",
+        "naziv": "Jos te nesto cini izuzetnom",
+        "zanrIme": "Narodna"
+    }
+]

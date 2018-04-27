@@ -18,12 +18,43 @@ ul{
     height: 500px;
 }
 #tracksMidle{
-    /* margin-left:20px;
-    margin-right:20px; */
+    margin-left:20px;
+    margin-right:20px;
 
 }
-
+#whole{
+    display: flex;
+}
 #carousel  img{
+    position: relative;
+    float: left;
     width: 100px;
-    height: 100px;;
+    height: 200px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.allArtStyle{
+    margin-left: 20px; 
+    width: 30%;
+    border: 1px solid black;
+    text-align: center;
+    background-color: darkgray;
+    font-size: 32px;
+}
+.allArtStyleMusic{
+    width: 67%;
+    margin-top: 20px;
+    border: 1px solid red;
+}
+.allArtStyle ul li{
+    list-style-type: none;
+    text-align: center;
+}
+.allArtStyle ul li:hover{
+    background-color: gold;
+    border: 1px solid grey; 
+}
+#dugme{
+   margin-left: 30px;
 }
