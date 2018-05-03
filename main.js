@@ -2,7 +2,7 @@
 // var elementi = document.getElementById("elementi");
 
 function openPunk() {
-    $( "#elementi" ).empty();
+    $("#elementi").empty();
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -113,15 +113,17 @@ function displayArtists() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+    xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
     function myFunction(data) {
         var unique = [];
         var output = "<ul>";
         var logo = document.createElement('img');
-        var elementi =document.getElementById("elementi");
-        var content =document.getElementById("content");
+        var elementi = document.getElementById("elementi");
+        var content = document.getElementById("content");
+        var modHead = document.getElementById("myModalLabel");
+        var modBody = document.getElementById("modBody");
         ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
         for (var i = 0; i < data.length; i++) {
             if (unique.indexOf(data[i].izvodjacIme) === -1) {
@@ -133,39 +135,59 @@ function displayArtists() {
             output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li>"
         }
 
-        function selectedArtists(id){
-            var dataArt=[];
-            var artData="";
-            console.log(data)
-            if(unique[id] === "EKV"){
+        function selectedArtists(id) {
+            var dataArt = [];
+            console.log(unique[id])
+            var artData = "<ul>";
+            var modData = "";
+            if (unique[id] === "EKV") {
                 dataArt.push(data[5])
-            }else if(unique[id] === "Riblja corba"){
+            } else if (unique[id] === "Riblja corba") {
                 dataArt.push(data[3])
                 dataArt.push(data[4])
-                logo.src="corba.jpg"
-                elementi.appendChild(logo);
             }
-            else if(unique[id] === "Goblini"){
+            else if (unique[id] === "Goblini") {
                 dataArt.push(data[2])
             }
-            else if(unique[id] === "Hladno pivo"){
+            else if (unique[id] === "Hladno pivo") {
                 dataArt.push(data[0])
                 dataArt.push(data[1])
             }
-            else if(unique[id] === "Miroslav Ilic"){
+            else if (unique[id] === "Miroslav Ilic") {
                 dataArt.push(data[6])
                 dataArt.push(data[8])
             }
-            else if(unique[id] === "Saban Saulic"){
+            else if (unique[id] === "Saban Saulic") {
                 dataArt.push(data[7])
             }
-            // document.getElementById("elementi").innerHTML = dataArt;
-            for(var i=0;i<dataArt.length;i++){
-                artData += "<ul><li>"+dataArt[i].izvodjacIme+": "+dataArt[i].naziv+"</li><hr><li>"+dataArt[i].zanrIme+"</li><hr><li>"+dataArt[i].cenaKolicina+"din</li></ul><button id='dugme' class='btn'>Kupi</button><br><br>";
+            // za prikaz u browseru
+            for (var i = 0; i < dataArt.length; i++) {
+                artData += "<li>" + dataArt[i].izvodjacIme + ": " + dataArt[i].naziv + "</li><hr><li>" + dataArt[i].zanrIme + "</li><hr><li>" + dataArt[i].cenaKolicina + 'din</li><a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">Play it</a><br><br>';
+                
+
             }
-            // artData ="</ul>"
-            elementi.innerHTML= artData;
+            function myData(data) {
+                modData += dataArt[data].izvodjacIme +": "+ dataArt[data].naziv+"<br>Cena: "+dataArt[data].cenaKolicina+"din";
+                modBody.innerHTML= modData;
+                
+                function postProData() {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var data = JSON.parse(this.responseText);
+                            myFunction(data);
+                        }
+                    };
+                    xhttp.open("GET", "file.JSON", true);
+                    xhttp.send();
+                }
+            }
+            window.myData = myData;
+            artData += "</ul>"  
+            // modal promet
+            elementi.innerHTML = artData;
             elementi.setAttribute('class', 'allArtStyleMusic')
+
         }
         window.selectedArtists = selectedArtists;
         output += "</ul>";
@@ -173,6 +195,41 @@ function displayArtists() {
         content.setAttribute('class', 'allArtStyle')
     }
 }
+////////////////trending artists
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        trArtists(data);
+    }
+};
+xhttp.open("GET", "file.JSON", true);
+xhttp.send();
+
+function trArtists(data) {
+    var unique = [];
+    var output = "<ul>";
+    var trendingArtists = document.getElementById("trendingArtists");
+    ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
+    for (var i = 0; i < data.length; i++) {
+        if (unique.indexOf(data[i].izvodjacIme) === -1) {
+            unique.push(data[i].izvodjacIme);
+        }
+    }
+
+    for (var i = 0; i < unique.length; i++) {
+        output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li><hr>"
+    }
+
+    function selectedArtists(id) {
+        output += "<li>" + unique[id] + "</li>"
+        console.log(unique[id])
+    }
+    window.selectedArtists = selectedArtists;
+    output += "</ul>";
+    trendingArtists.innerHTML = output;
+}
+
 function displayGanre() {
     var xhttp = new XMLHttpRequest();
     empty = "";
@@ -201,29 +258,29 @@ function displayGanre() {
             output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li>"
         }
         console.log(data)
-        function selectedArtists(id){
-            var genreData=[];
-            var gData="";
-            if(unique[id] === "Punk"){
+        function selectedArtists(id) {
+            var genreData = [];
+            var gData = "";
+            if (unique[id] === "Punk") {
                 genreData.push(data[0])
                 genreData.push(data[1])
                 genreData.push(data[2])
-            }else if(unique[id] === "Rock"){
+            } else if (unique[id] === "Rock") {
                 genreData.push(data[3])
                 genreData.push(data[4])
                 genreData.push(data[5])
             }
-            else if(unique[id] === "Narodna"){
+            else if (unique[id] === "Narodna") {
                 genreData.push(data[6])
                 genreData.push(data[7])
                 genreData.push(data[8])
             }
             // document.getElementById("elementi").innerHTML = dataArt;
-            for(var i=0;i<genreData.length;i++){
-                gData += "<ul><li>"+genreData[i].izvodjacIme+"</li><li>"+genreData[i].naziv+"</li><li>"+genreData[i].zanrIme+"</li><li>"+genreData[i].cenaKolicina+"</li><li></ul>";
+            for (var i = 0; i < genreData.length; i++) {
+                gData += "<ul><li>" + genreData[i].izvodjacIme + "</li><li>" + genreData[i].naziv + "</li><li>" + genreData[i].zanrIme + "</li><li>" + genreData[i].cenaKolicina + "</li><li></ul>";
             }
             // artData ="</ul>"
-            document.getElementById("elementi").innerHTML= gData;
+            document.getElementById("elementi").innerHTML = gData;
         }
         window.selectedArtists = selectedArtists;
         output += "</ul>";
@@ -244,15 +301,36 @@ function displayMusic() {
 
     function myFunction(data) {
         var output = "";
-        var empty="";
-        for(var i=0;i<data.length;i++){
-            output += "<ul><li>Ime izvodjaca: "+ data[i].izvodjacIme + "</li><li>Naziv pesme: "+ data[i].naziv + "</li><li>Zanr: "+ data[i].zanrIme + "</li><li>Cena pesme: "+ data[i].cenaKolicina + "</li></ul>";
+        var empty = "";
+        for (var i = 0; i < data.length; i++) {
+            output += "<ul><li>Ime izvodjaca: " + data[i].izvodjacIme + "</li><li>Naziv pesme: " + data[i].naziv + "</li><li>Zanr: " + data[i].zanrIme + "</li><li>Cena pesme: " + data[i].cenaKolicina + "</li></ul>";
         }
         document.getElementById("content").innerHTML = output;
         document.getElementById("elementi").innerHTML = empty;
     }
 }
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        myFunction(data);
+    }
+};
+xhttp.open("GET", "file.JSON", true);
+xhttp.send();
 
+function myFunction(data) {
+    var output = "";
+    var empty = "";
+    var trendingTracks = document.getElementById("trendingTracks");
+    var heading = document.createElement("h1");
+    h1 = "Trending tracks";
+    // trendingTracks.appendChild(heading);
+    for (var i = 0; i < data.length; i++) {
+        output += "<ul><li>" + data[i].izvodjacIme + ": " + data[i].naziv + "</li></ul><hr>";
+    }
+    trendingTracks.innerHTML = output;
+}
 
 
 
