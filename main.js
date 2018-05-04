@@ -163,28 +163,27 @@ function displayArtists() {
             // za prikaz u browseru
             for (var i = 0; i < dataArt.length; i++) {
                 artData += "<li>" + dataArt[i].izvodjacIme + ": " + dataArt[i].naziv + "</li><hr><li>" + dataArt[i].zanrIme + "</li><hr><li>" + dataArt[i].cenaKolicina + 'din</li><a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">Play it</a><br><br>';
-                
+
 
             }
             function myData(data) {
-                modData += dataArt[data].izvodjacIme +": "+ dataArt[data].naziv+"<br>Cena: "+dataArt[data].cenaKolicina+"din";
-                modBody.innerHTML= modData;
-                
-                function postProData() {
+                modData = "";
+                modData += dataArt[data].izvodjacIme + ": " + dataArt[data].naziv + "<br>Cena: " + dataArt[data].cenaKolicina + "din";
+                modBody.innerHTML = modData;
+                document.getElementById("buyIt").addEventListener("click", function () {
                     var xhttp = new XMLHttpRequest();
                     xhttp.onreadystatechange = function () {
                         if (this.readyState == 4 && this.status == 200) {
                             var data = JSON.parse(this.responseText);
-                            myFunction(data);
                         }
                     };
-                    xhttp.open("GET", "file.JSON", true);
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
                     xhttp.send();
                 }
-            }
+                )
+            };
             window.myData = myData;
-            artData += "</ul>"  
-            // modal promet
+            artData += "</ul>"
             elementi.innerHTML = artData;
             elementi.setAttribute('class', 'allArtStyleMusic')
 
@@ -300,11 +299,28 @@ function displayMusic() {
     xhttp.send();
 
     function myFunction(data) {
-        var output = "";
+        var output = "<ul>";
         var empty = "";
         for (var i = 0; i < data.length; i++) {
-            output += "<ul><li>Ime izvodjaca: " + data[i].izvodjacIme + "</li><li>Naziv pesme: " + data[i].naziv + "</li><li>Zanr: " + data[i].zanrIme + "</li><li>Cena pesme: " + data[i].cenaKolicina + "</li></ul>";
+            output += '<li data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span></li><hr>';
         }
+        console.log(data)
+        function myData(pased) {
+            console.log(pased)
+            modData = "";
+            modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
+            modBody.innerHTML = modData;
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                }
+            };
+            xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
+            xhttp.send();
+        }
+        window.myData = myData;
+        output += "</ul>"
         document.getElementById("content").innerHTML = output;
         document.getElementById("elementi").innerHTML = empty;
     }
@@ -313,29 +329,35 @@ var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.responseText);
-        myFunction(data);
+        trendingFunction(data);
     }
 };
-xhttp.open("GET", "file.JSON", true);
+xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
 xhttp.send();
 
-function myFunction(data) {
+function trendingFunction(data) {
     var output = "";
     var empty = "";
+    var one ="";
+    var one1 ="";
+    var one2 ="";
+    var one3 ="";
+    var one4 ="";
+    var one5 ="";
+    var one6 ="";
+    var one7 ="";
+    var one8 ="";
+
+    var dataProm = data;
+    var uniqueTracks = [];
     var trendingTracks = document.getElementById("trendingTracks");
-    var heading = document.createElement("h1");
-    h1 = "Trending tracks";
-    // trendingTracks.appendChild(heading);
-    for (var i = 0; i < data.length; i++) {
-        output += "<ul><li>" + data[i].izvodjacIme + ": " + data[i].naziv + "</li></ul><hr>";
+
+
+    console.log(dataProm)
+
     }
     trendingTracks.innerHTML = output;
 }
-
-
-
-
-
 
 
 $(document).ready(function () {
