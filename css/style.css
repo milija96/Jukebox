@@ -3,11 +3,13 @@
     color: white;
 }
 #play{
-    border: 1px solid green;
     width: auto;
     height: 300px;
 }
 #content{
+    margin-top: 20px;
+}
+#elementi{
     margin-top: 20px;
 }
 ul{
@@ -26,6 +28,9 @@ ul{
 body{
     width: 100%;
     height: 100%;
+}
+#whole{
+    position: relative;
 }
 #carousel  img{
     position: relative;
@@ -71,4 +76,14 @@ body{
 }
 #music{
     opacity: 0.5;
+}
+#musicData{
+    border: 1px solid green;
+    height: 300px;
+    width: 100%;
+}
+#tabela{
+    width: 100%;
+    height: 300px;
+    font-size: 25px;
 }

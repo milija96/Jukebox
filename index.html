@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
-        <title>Bootstrap Example</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="main.js"></script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
@@ -47,7 +48,7 @@
             </div>
         </nav>
     </header>
-    <div id="whole">
+    <div id="whole" class="row col-md-12 container">
         <div class="container" id="content">
             <div class="row flex-container col-sm-12 col-lg-12" id="play">
                 <div id="carousel" class="carousel slide" data-ride="carousel">
@@ -115,24 +116,24 @@
         </div>
         <div id="elementi"></div>
         <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
+            <div class="modal-dialog">
+                <div class="modal-content">
                     <div class="modal-header" id="modHed" style="color : black">
                         <h3>Music data</h3>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
                     </div>
                     <div class="modal-body" id="modBody">
-                      
+
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" id="buyIt">Buy</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="buyIt">Buy</button>
                     </div>
-                  </div>
                 </div>
-              </div>
+            </div>
+        </div>
     </div>
     <footer>
     </footer>

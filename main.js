@@ -113,33 +113,33 @@ function displayArtists() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
     function myFunction(data) {
         var unique = [];
-        var output = "<ul>";
-        var logo = document.createElement('img');
+        var output = "<table id='tabela' style ='border: 1px solid red'>";
+        var whole = document.getElementById("whole");
         var elementi = document.getElementById("elementi");
         var content = document.getElementById("content");
         var modHead = document.getElementById("myModalLabel");
         var modBody = document.getElementById("modBody");
+        // whole.style.display = "flex";
+        content.setAttribute("class", "col-md-3")
+        elementi.setAttribute("class", "col-md-9")
         ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
         for (var i = 0; i < data.length; i++) {
             if (unique.indexOf(data[i].izvodjacIme) === -1) {
                 unique.push(data[i].izvodjacIme);
             }
         }
-
         for (var i = 0; i < unique.length; i++) {
-            output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li>"
+            output += '<tr><td id="dataMusic"onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
         }
-
         function selectedArtists(id) {
             var dataArt = [];
             console.log(unique[id])
-            var artData = "<ul>";
-            var modData = "";
+            var artData = "<ul id='musicData' style ='border: 1px solid green'>";
             if (unique[id] === "EKV") {
                 dataArt.push(data[5])
             } else if (unique[id] === "Riblja corba") {
@@ -162,7 +162,7 @@ function displayArtists() {
             }
             // za prikaz u browseru
             for (var i = 0; i < dataArt.length; i++) {
-                artData += "<li>" + dataArt[i].izvodjacIme + ": " + dataArt[i].naziv + "</li><hr><li>" + dataArt[i].zanrIme + "</li><hr><li>" + dataArt[i].cenaKolicina + 'din</li><a href="#" class="btn btn-lg btn-success" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">Play it</a><br><br>';
+                artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
 
 
             }
@@ -179,60 +179,68 @@ function displayArtists() {
                     };
                     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
                     xhttp.send();
+                    $(document).ready(function () {
+                        $("#basicModal").removeClass('fade').modal('hide')
+                    });
                 }
                 )
             };
             window.myData = myData;
             artData += "</ul>"
             elementi.innerHTML = artData;
-            elementi.setAttribute('class', 'allArtStyleMusic')
 
         }
         window.selectedArtists = selectedArtists;
-        output += "</ul>";
+        output += "</table>";
         content.innerHTML = output;
-        content.setAttribute('class', 'allArtStyle')
     }
 }
-////////////////trending artists
+////////////////trending songs
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
         var data = JSON.parse(this.responseText);
-        trArtists(data);
+        trMusic(data);
     }
 };
-xhttp.open("GET", "file.JSON", true);
+xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/top5songs", true);
 xhttp.send();
 
-function trArtists(data) {
-    var unique = [];
-    var output = "<ul>";
-    var trendingArtists = document.getElementById("trendingArtists");
-    ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
+function trMusic(data) {
+    var dataout = "<h2>Trending music</h2><br><ul>";
     for (var i = 0; i < data.length; i++) {
-        if (unique.indexOf(data[i].izvodjacIme) === -1) {
-            unique.push(data[i].izvodjacIme);
-        }
+        dataout += '<li onclick="myData(' + i + ')">' + data[i].pesmaNaziv + '</span><i style="float: right" class="fa fa-shopping-cart"></i></li><hr>';
     }
-
-    for (var i = 0; i < unique.length; i++) {
-        output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li><hr>"
-    }
-
-    function selectedArtists(id) {
-        output += "<li>" + unique[id] + "</li>"
-        console.log(unique[id])
-    }
-    window.selectedArtists = selectedArtists;
-    output += "</ul>";
-    trendingArtists.innerHTML = output;
+    dataout += "</ul>"
+    document.getElementById("trendingTracks").innerHTML = dataout;
 }
+///////////////////////trending artists
+var xhttpp = new XMLHttpRequest();
+xhttpp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+        var dataA = JSON.parse(this.responseText);
+        trArtists(dataA);
+    }
+};
+xhttpp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/top5artists", true);
+xhttpp.send();
+
+function trArtists(dataA) {
+    var dataoutA = "<h2>Trending artists</h2><br><ul>";
+    for (var i = 0; i < dataA.length; i++) {
+        dataoutA += '<li onclick="myDataa(' + i + ')">' + dataA[i].izvodjacIme + '</span><i style="float: right" class="fa fa-shopping-cart"></i></li><hr>';
+    }
+    dataoutA += "</ul>"
+    document.getElementById("trendingArtists").innerHTML = dataoutA;
+}
+
 
 function displayGanre() {
     var xhttp = new XMLHttpRequest();
     empty = "";
     document.getElementById("elementi").innerHTML = empty;
+    content.setAttribute("class", "col-md-3")
+    elementi.setAttribute("class", "col-md-9")
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
@@ -256,10 +264,11 @@ function displayGanre() {
         for (var i = 0; i < unique.length; i++) {
             output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li>"
         }
+
         console.log(data)
         function selectedArtists(id) {
             var genreData = [];
-            var gData = "";
+            var gData = "<ul>";
             if (unique[id] === "Punk") {
                 genreData.push(data[0])
                 genreData.push(data[1])
@@ -276,10 +285,31 @@ function displayGanre() {
             }
             // document.getElementById("elementi").innerHTML = dataArt;
             for (var i = 0; i < genreData.length; i++) {
-                gData += "<ul><li>" + genreData[i].izvodjacIme + "</li><li>" + genreData[i].naziv + "</li><li>" + genreData[i].zanrIme + "</li><li>" + genreData[i].cenaKolicina + "</li><li></ul>";
+                gData += '<li>' + genreData[i].izvodjacIme + ' <br><span id="music">' + genreData[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
             }
-            // artData ="</ul>"
+            function myData(data) {
+                modData = "";
+                modData += dataArt[data].izvodjacIme + ": " + dataArt[data].naziv + "<br>Cena: " + dataArt[data].cenaKolicina + "din";
+                modBody.innerHTML = modData;
+                document.getElementById("buyIt").addEventListener("click", function () {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var data = JSON.parse(this.responseText);
+                        }
+                    };
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
+                    xhttp.send();
+                    $(document).ready(function () {
+                        $("#basicModal").removeClass('fade').modal('hide')
+                    });
+                }
+                )
+            };
+            gData += "</ul>"
             document.getElementById("elementi").innerHTML = gData;
+            document.getElementById("elementi").className = "container";
+
         }
         window.selectedArtists = selectedArtists;
         output += "</ul>";
@@ -302,7 +332,7 @@ function displayMusic() {
         var output = "<ul>";
         var empty = "";
         for (var i = 0; i < data.length; i++) {
-            output += '<li data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span></li><hr>';
+            output += '<li data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i style="float: right" class="fa fa-shopping-cart"></i></li><hr>';
         }
         console.log(data)
         function myData(pased) {
@@ -325,41 +355,6 @@ function displayMusic() {
         document.getElementById("elementi").innerHTML = empty;
     }
 }
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-        var data = JSON.parse(this.responseText);
-        trendingFunction(data);
-    }
-};
-xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
-xhttp.send();
-
-function trendingFunction(data) {
-    var output = "";
-    var empty = "";
-    var one ="";
-    var one1 ="";
-    var one2 ="";
-    var one3 ="";
-    var one4 ="";
-    var one5 ="";
-    var one6 ="";
-    var one7 ="";
-    var one8 ="";
-
-    var dataProm = data;
-    var uniqueTracks = [];
-    var trendingTracks = document.getElementById("trendingTracks");
-
-
-    console.log(dataProm)
-
-    }
-    trendingTracks.innerHTML = output;
-}
-
-
 $(document).ready(function () {
     $("#carousel").carousel({
         interval: 2000
