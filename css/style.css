@@ -56,7 +56,6 @@ body{
 }
 .allArtStyle ul li{
     list-style-type: none;
-    text-align: center;
 }
 .allArtStyle ul li:hover{
     background-color: gold;
