@@ -118,12 +118,14 @@ function displayArtists() {
 
     function myFunction(data) {
         var unique = [];
-        var output = "<table id='tabela' style ='border: 1px solid red'>";
+        var output = "";
         var whole = document.getElementById("whole");
         var elementi = document.getElementById("elementi");
         var content = document.getElementById("content");
         var modHead = document.getElementById("myModalLabel");
         var modBody = document.getElementById("modBody");
+        var artName = document.getElementById("artName");
+        var musName = document.getElementById("musName");
         // whole.style.display = "flex";
         content.setAttribute("class", "col-md-3")
         elementi.setAttribute("class", "col-md-9")
@@ -134,12 +136,11 @@ function displayArtists() {
             }
         }
         for (var i = 0; i < unique.length; i++) {
-            output += '<tr><td id="dataMusic"onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
+            output += '<ul class="nav sidebar-nav"><li id="dataMusic"onclick="selectedArtists(' + i + ')">' + unique[i] + "</li></ul>"
         }
         function selectedArtists(id) {
             var dataArt = [];
-            console.log(unique[id])
-            var artData = "<ul id='musicData' style ='border: 1px solid green'>";
+            var artData = "<ul id='musicData'";
             if (unique[id] === "EKV") {
                 dataArt.push(data[5])
             } else if (unique[id] === "Riblja corba") {
@@ -163,10 +164,12 @@ function displayArtists() {
             // za prikaz u browseru
             for (var i = 0; i < dataArt.length; i++) {
                 artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
-
-
             }
             function myData(data) {
+                var plyArt = "<h2>";
+                var plyMus = "<h3>";
+                plyArt += dataArt[data].izvodjacIme;
+                plyMus += dataArt[data].naziv;
                 modData = "";
                 modData += dataArt[data].izvodjacIme + ": " + dataArt[data].naziv + "<br>Cena: " + dataArt[data].cenaKolicina + "din";
                 modBody.innerHTML = modData;
@@ -179,8 +182,16 @@ function displayArtists() {
                     };
                     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
                     xhttp.send();
+                    console.log(plyArt)
+                    plyArt += "</h2>";
+                    plyMus += "</h3>";
+                    
+                    artName.innerHTML = plyArt;
+                    musName.innerHTML = plyMus;
+
                     $(document).ready(function () {
                         $("#basicModal").removeClass('fade').modal('hide')
+                        $("#project-wrapper").slideDown();
                     });
                 }
                 )
@@ -191,7 +202,7 @@ function displayArtists() {
 
         }
         window.selectedArtists = selectedArtists;
-        output += "</table>";
+        output += "";
         content.innerHTML = output;
     }
 }
@@ -222,6 +233,8 @@ xhttpp.onreadystatechange = function () {
         trArtists(dataA);
     }
 };
+
+
 xhttpp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/top5artists", true);
 xhttpp.send();
 
@@ -238,6 +251,8 @@ function trArtists(dataA) {
 function displayGanre() {
     var xhttp = new XMLHttpRequest();
     empty = "";
+    var elementi = document.getElementById("elementi");
+    var content = document.getElementById("content");
     document.getElementById("elementi").innerHTML = empty;
     content.setAttribute("class", "col-md-3")
     elementi.setAttribute("class", "col-md-9")
@@ -252,8 +267,14 @@ function displayGanre() {
 
 
     function myFunction(data) {
+        var artName = document.getElementById("artName");
+        var musName = document.getElementById("musName");
+        var modBody = document.getElementById("modBody");
+        var modHead = document.getElementById("myModalLabel");
+        var artName = document.getElementById("artName");
+        var musName = document.getElementById("musName");
         var unique = [];
-        var output = "<ul>";
+        var output = "<table id='ganreNames'>";
         ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
         for (var i = 0; i < data.length; i++) {
             if (unique.indexOf(data[i].zanrIme) === -1) {
@@ -262,13 +283,13 @@ function displayGanre() {
         }
 
         for (var i = 0; i < unique.length; i++) {
-            output += '<li onclick="selectedArtists(' + i + ')">' + unique[i] + "</li>"
+            output += '<tr><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
         }
 
         console.log(data)
         function selectedArtists(id) {
             var genreData = [];
-            var gData = "<ul>";
+            var gData = "<ul id='ganreMusic'>";
             if (unique[id] === "Punk") {
                 genreData.push(data[0])
                 genreData.push(data[1])
@@ -285,11 +306,16 @@ function displayGanre() {
             }
             // document.getElementById("elementi").innerHTML = dataArt;
             for (var i = 0; i < genreData.length; i++) {
-                gData += '<li>' + genreData[i].izvodjacIme + ' <br><span id="music">' + genreData[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
+                gData += '<li>' + genreData[i].izvodjacIme + ' <br><span id="music">' + genreData[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="geData(' + i + ')"> Play it</a><br><br>';
             }
-            function myData(data) {
+            function geData(data) {
+                var plyArt = "<h2>";
+                var plyMus = "<h3>";
+                plyArt += genreData[data].izvodjacIme;
+                plyMus += genreData[data].naziv;
                 modData = "";
-                modData += dataArt[data].izvodjacIme + ": " + dataArt[data].naziv + "<br>Cena: " + dataArt[data].cenaKolicina + "din";
+                console.log(data)
+                modData += genreData[data].izvodjacIme + ": " + genreData[data].naziv + "<br>Cena: " + genreData[data].cenaKolicina + "din";
                 modBody.innerHTML = modData;
                 document.getElementById("buyIt").addEventListener("click", function () {
                     var xhttp = new XMLHttpRequest();
@@ -298,18 +324,24 @@ function displayGanre() {
                             var data = JSON.parse(this.responseText);
                         }
                     };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + genreData[data].id, true);
                     xhttp.send();
+
+                    plyArt += "</h2>";
+                    plyMus += "</h3>";
+                    
+                    artName.innerHTML = plyArt;
+                    musName.innerHTML = plyMus;
                     $(document).ready(function () {
                         $("#basicModal").removeClass('fade').modal('hide')
+                        $("#project-wrapper").slideDown();
                     });
                 }
                 )
-            };
+            }
+            window.geData = geData;
             gData += "</ul>"
             document.getElementById("elementi").innerHTML = gData;
-            document.getElementById("elementi").className = "container";
-
         }
         window.selectedArtists = selectedArtists;
         output += "</ul>";
@@ -317,7 +349,8 @@ function displayGanre() {
     }
 }
 function displayMusic() {
-
+    content.setAttribute("class", "col-md-6")
+    elementi.setAttribute("class", "col-md-6")
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -329,7 +362,7 @@ function displayMusic() {
     xhttp.send();
 
     function myFunction(data) {
-        var output = "<ul>";
+        var output = "<ul id='myUl'>";
         var empty = "";
         for (var i = 0; i < data.length; i++) {
             output += '<li data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i style="float: right" class="fa fa-shopping-cart"></i></li><hr>';
@@ -355,6 +388,7 @@ function displayMusic() {
         document.getElementById("elementi").innerHTML = empty;
     }
 }
+
 $(document).ready(function () {
     $("#carousel").carousel({
         interval: 2000

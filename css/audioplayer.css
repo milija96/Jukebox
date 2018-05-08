@@ -1,0 +1,22 @@
+#project-wrapper{
+    position: fixed;
+    bottom: 10px;
+    left: 700px;
+    width: 20%;
+    display: none;
+    background-image: url("/og_image.png");
+    background-size: cover;
+    border-radius: 25px;
+}
+#musName{
+    opacity: 0.5;
+}
+#range{
+    width: 100%;
+}
+#artName{
+    text-align: center;
+}
+#musName{
+    text-align: center;
+}
