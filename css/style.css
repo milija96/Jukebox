@@ -2,6 +2,9 @@
     box-sizing: border-box;
     color: white;
 }
+#firstSec{
+    height: 250px;
+}
 #play{
     width: auto;
     height: 300px;
@@ -89,9 +92,77 @@ body{
 #ganreNames{
     width: 100%;
     font-size: 25px;
+    margin: 20px 20px;
+    border: none; 
+    border-collapse: collapse;
+}
+#ganreNames td + td {
+    border: 1px soild red;
+}
+#ganreNames {
+    background-color: transparent;
+    margin-bottom: 100px;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    border-collapse: separate;
+    border-spacing: 1px 5px;
 }
 #ganreMusic{
     width: 100%;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 20px; 
+}
+#ganreMusic a{
+    margin-right: 10px; 
+}
+#ganreMusic li{
+    margin-top: 10px; 
+}
+#musicData{
+    width: 100%;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 20px; 
+}
+#musicData a{
+    margin-right: 10px; 
+}
+#musicData li{
+    margin-top: 10px; 
+}
+#play{
+   /* border: 1px solid red; */
+}
+
+#ganreRow td:first-child{
+    text-align: center;
+}
+#ganreRow tr{
+    border-radius: 10px; 
+}
+#ganreNames td + td{
+    background: lightblue;
+    color: black;
+}
+#ganreNames tr + tr{
+    background-color: lightblue;
+    border-radius: 10px;
+}
+#ganreNames tr{
+    border-radius: 10px;
+}
+
+.fa-music{
+    color: black;
+}
+#cart{
+    float: right;
+    font-size: 20px;
+    transition: 0.5s;
+    margin: 0 auto;
 
 }
-///////////
+#cart:hover{
+    font-size: 35px; 
+}

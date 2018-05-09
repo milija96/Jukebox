@@ -113,12 +113,12 @@ function displayArtists() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+    xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
     function myFunction(data) {
         var unique = [];
-        var output = "";
+        var output = "<table id='ganreNames'><th colspan='3'>Music</th>";
         var whole = document.getElementById("whole");
         var elementi = document.getElementById("elementi");
         var content = document.getElementById("content");
@@ -128,7 +128,7 @@ function displayArtists() {
         var musName = document.getElementById("musName");
         // whole.style.display = "flex";
         content.setAttribute("class", "col-md-3")
-        elementi.setAttribute("class", "col-md-9")
+        elementi.setAttribute("class", "col-md-7")
         ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
         for (var i = 0; i < data.length; i++) {
             if (unique.indexOf(data[i].izvodjacIme) === -1) {
@@ -136,7 +136,7 @@ function displayArtists() {
             }
         }
         for (var i = 0; i < unique.length; i++) {
-            output += '<ul class="nav sidebar-nav"><li id="dataMusic"onclick="selectedArtists(' + i + ')">' + unique[i] + "</li></ul>"
+            output += '<tr id="ganreRow"><td>'+'<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
         }
         function selectedArtists(id) {
             var dataArt = [];
@@ -163,7 +163,7 @@ function displayArtists() {
             }
             // za prikaz u browseru
             for (var i = 0; i < dataArt.length; i++) {
-                artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
+                artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success " data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
             }
             function myData(data) {
                 var plyArt = "<h2>";
@@ -202,7 +202,7 @@ function displayArtists() {
 
         }
         window.selectedArtists = selectedArtists;
-        output += "";
+        output += "</tr></table>";
         content.innerHTML = output;
     }
 }
@@ -220,7 +220,7 @@ xhttp.send();
 function trMusic(data) {
     var dataout = "<h2>Trending music</h2><br><ul>";
     for (var i = 0; i < data.length; i++) {
-        dataout += '<li onclick="myData(' + i + ')">' + data[i].pesmaNaziv + '</span><i style="float: right" class="fa fa-shopping-cart"></i></li><hr>';
+        dataout += '<li onclick="myData(' + i + ')">' + data[i].pesmaNaziv + '</span><i style="float: right" class="fa fa-play fa spin"></i></li><hr>';
     }
     dataout += "</ul>"
     document.getElementById("trendingTracks").innerHTML = dataout;
@@ -234,7 +234,6 @@ xhttpp.onreadystatechange = function () {
     }
 };
 
-
 xhttpp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/top5artists", true);
 xhttpp.send();
 
@@ -246,8 +245,30 @@ function trArtists(dataA) {
     dataoutA += "</ul>"
     document.getElementById("trendingArtists").innerHTML = dataoutA;
 }
+/////////recomendations
+// var xhttppp = new XMLHttpRequest();
+// xhttppp.onreadystatechange = function () {
+//     if (this.readyState == 4 && this.status == 200) {
+//         var dataR = JSON.parse(this.responseText);
+//         recomen(dataR);
+//     }
+// };
 
+// xhttpp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+// xhttpp.send();
 
+// function recomen(dataR){
+//     var reco = document.getElementById("reco");
+//     var dataRdisp = "<ul>";
+//     for(var i = 0;i < dataR.length; i++){
+//         if(dataR[i].id === "10"){
+//             dataRdisp += '<li onclick="myRecData(' + i + ')">'+dataR[i].naziv+'</span><br></li><hr>';
+//         }
+//     }
+//     function myRecData(recDa){
+//         console.log(recDa)
+//     }
+// }
 function displayGanre() {
     var xhttp = new XMLHttpRequest();
     empty = "";
@@ -255,14 +276,14 @@ function displayGanre() {
     var content = document.getElementById("content");
     document.getElementById("elementi").innerHTML = empty;
     content.setAttribute("class", "col-md-3")
-    elementi.setAttribute("class", "col-md-9")
+    elementi.setAttribute("class", "col-md-7")
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
             myFunction(data);
         }
     };
-    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+    xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
 
@@ -274,7 +295,7 @@ function displayGanre() {
         var artName = document.getElementById("artName");
         var musName = document.getElementById("musName");
         var unique = [];
-        var output = "<table id='ganreNames'>";
+        var output = "<table id='ganreNames'><th colspan='3'>Music ganres</th>";
         ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
         for (var i = 0; i < data.length; i++) {
             if (unique.indexOf(data[i].zanrIme) === -1) {
@@ -283,7 +304,8 @@ function displayGanre() {
         }
 
         for (var i = 0; i < unique.length; i++) {
-            output += '<tr><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
+            output += '<tr id="ganreRow"><td>'+'<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
+            
         }
 
         console.log(data)
@@ -306,7 +328,7 @@ function displayGanre() {
             }
             // document.getElementById("elementi").innerHTML = dataArt;
             for (var i = 0; i < genreData.length; i++) {
-                gData += '<li>' + genreData[i].izvodjacIme + ' <br><span id="music">' + genreData[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="geData(' + i + ')"> Play it</a><br><br>';
+                gData += '<li>' + genreData[i].izvodjacIme + ' <br><span id="music">' + genreData[i].naziv + '</span></li><br><a id="playItbtn" style="float: right" href="#" class="btn btn-success fa fa-shopping-cart" data-toggle="modal" data-target="#basicModal" onclick="geData(' + i + ')"> Play it</a><br><br>';
             }
             function geData(data) {
                 var plyArt = "<h2>";
@@ -344,13 +366,23 @@ function displayGanre() {
             document.getElementById("elementi").innerHTML = gData;
         }
         window.selectedArtists = selectedArtists;
-        output += "</ul>";
+        output += "</tr></table>";
         document.getElementById("content").innerHTML = output;
     }
 }
 function displayMusic() {
-    content.setAttribute("class", "col-md-6")
-    elementi.setAttribute("class", "col-md-6")
+    var elementi = document.getElementById("elementi");
+    var content = document.getElementById("content");
+
+    var artName = document.getElementById("artName");
+    var musName = document.getElementById("musName");
+    var modBody = document.getElementById("modBody");
+    var modHead = document.getElementById("myModalLabel");
+    var artName = document.getElementById("artName");
+    var musName = document.getElementById("musName");
+
+    content.setAttribute("class", "col-md-6");
+    elementi.setAttribute("class", "col-md-6");
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -358,21 +390,25 @@ function displayMusic() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+    xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
     function myFunction(data) {
         var output = "<ul id='myUl'>";
         var empty = "";
         for (var i = 0; i < data.length; i++) {
-            output += '<li data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i style="float: right" class="fa fa-shopping-cart"></i></li><hr>';
+            output += '<li id="buyMus" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></li><hr>';
         }
         console.log(data)
         function myData(pased) {
-            console.log(pased)
+            var plyArt = "<h2>";
+            var plyMus = "<h3>";
+            plyArt += data[pased].izvodjacIme;
+            plyMus += data[pased].naziv;
             modData = "";
             modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
             modBody.innerHTML = modData;
+            document.getElementById("buyIt").addEventListener("click", function (){
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -381,6 +417,17 @@ function displayMusic() {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
             xhttp.send();
+            plyArt += "</h2>";
+            plyMus += "</h3>";
+            
+            artName.innerHTML = plyArt;
+            musName.innerHTML = plyMus;
+            $(document).ready(function () {
+                $("#basicModal").removeClass('fade').modal('hide')
+                $("#project-wrapper").slideDown();
+            });
+            })
+         
         }
         window.myData = myData;
         output += "</ul>"
