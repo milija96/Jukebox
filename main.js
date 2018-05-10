@@ -76,9 +76,9 @@ xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/top
 xhttp.send();
 
 function trMusic(data) {
-    var dataout = "<ul><h2>Trending music</h2><br>";
+    var dataout = "<h2>Trending music</h2><br>";
     for (var i = 0; i < data.length; i++) {
-        dataout += '<li  data-toggle="modal" data-target="#basicModal" onclick="myTrendMusic(' + i + ')">' + data[i].pesmaNaziv + '</span><i style="float: right" class="fa fa-play fa spin"></i></li><hr>';
+        dataout += '<p  data-toggle="modal" data-target="#basicModal" onclick="myTrendMusic(' + i + ')">' + data[i].pesmaNaziv + '</span><i style="float: right" class="fa fa-play fa spin"></i></p><hr>';
     }
     function myTrendMusic(dataTrending){
         $("#project-wrapper").slideUp();
@@ -109,7 +109,7 @@ function trMusic(data) {
         
         )
     }window.myTrendMusic = myTrendMusic;
-    dataout += "</ul>"
+
     document.getElementById("trendingTracks").innerHTML = dataout;
 }
 ///////////////////////trending artists
@@ -125,7 +125,7 @@ xhttpp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/to
 xhttpp.send();
 
 function trArtists(dataA) {
-    var dataoutA = "<ul style='border: 1px solid blue'><h2>Trending artists</h2><br>";
+    var dataoutA = "<h2>Trending artists</h2><br>";
     for (var i = 0; i < dataA.length; i++) {
         dataoutA += '<li style="border: 1px solid blue" onclick="displayMusicOfArt(' + i + ')">' + dataA[i].izvodjacIme + '</span></li><hr>';
     }
@@ -157,10 +157,10 @@ function trArtists(dataA) {
             xhttp.send();
         
             function myFunction(data) {
-                var output = "<ul id='myUl'>";
+                var output = "";
                 var empty = "";
                 for (var i = 0; i < data.length; i++) {
-                    output += '<li id="buyMus" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></li><hr>';
+                    output += '<p id="buyMus" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></p><hr>';
                 }
                 console.log(dat)
                 function myData(pased) {
@@ -194,7 +194,7 @@ function trArtists(dataA) {
                  
                 }
                 window.myData = myData;
-                output += "</ul>"
+                
                 document.getElementById("content").innerHTML = output;
                 document.getElementById("elementi").innerHTML = empty;
             }
@@ -487,7 +487,7 @@ function displayArtists() {
             }
             // za prikaz u browseru
             for (var i = 0; i < dataArt.length; i++) {
-                artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a style="float: right" href="#" class="btn btn-success " data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
+                artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a id="musicButton" style="float: right" href="#" class="btn btn-success " data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
             }
             function myData(data) {
                 $("#project-wrapper").slideUp();
