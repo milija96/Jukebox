@@ -38,33 +38,22 @@ body{
 #carousel  img{
     position: relative;
     float: left;
-    width: 300px;
+    width: 280px;
     height: 200px;
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
 }
-.allArtStyle{
-    margin-left: 20px; 
-    width: 30%;
-    border: 1px solid black;
-    text-align: center;
-    background-color: darkgray;
-    font-size: 32px;
+#carouselLinear{
+    width: 280px;
 }
-.allArtStyleMusic{
-    width: 67%;
-    margin-top: 20px;
-    border: 1px solid red;
+#carouselLinear img{
+    width: 280px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
 }
-.allArtStyle ul li{
-    list-style-type: none;
-}
-.allArtStyle ul li:hover{
-    background-color: gold;
-    border: 1px solid grey; 
-}
-
 #modBody{
     z-index: 2;
     color: black;
@@ -83,6 +72,9 @@ body{
     padding-top: 50px;
     height: 300px;
     width: 100%;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 20px; 
 }
 #tabela{
     width: 100%;
@@ -107,7 +99,7 @@ body{
     border-collapse: separate;
     border-spacing: 1px 5px;
 }
-#ganreMusic{
+#ganreMusic {
     width: 100%;
     border: 1px solid aliceblue;
     border-radius: 10px; 
@@ -119,22 +111,13 @@ body{
 #ganreMusic li{
     margin-top: 10px; 
 }
-#musicData{
-    width: 100%;
-    border: 1px solid aliceblue;
-    border-radius: 10px; 
-    margin-top: 20px; 
-}
-#musicData a{
-    margin-right: 10px; 
-}
-#musicData li{
-    margin-top: 10px; 
-}
-#play{
-   /* border: 1px solid red; */
-}
 
+#musicRow td:first-child{
+    text-align: center;
+}
+#musicRow tr{
+    border-radius: 10px; 
+}
 #ganreRow td:first-child{
     text-align: center;
 }
@@ -165,4 +148,30 @@ body{
 }
 #cart:hover{
     font-size: 35px; 
+}
+#buyP a{
+    text-decoration: none;
+    color: inherit;
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #musicData{
+        padding-top: 0px;
+        height: 250px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 0px;
+    }
+    #content {
+        height: 350px;
+    }
+    #firstSec{
+        margin-bottom: 400px;  
+    }
+    #project-wrapper{
+        left: 10px;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
 }
