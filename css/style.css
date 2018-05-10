@@ -1,0 +1,185 @@
+*{
+    box-sizing: border-box;
+    color: white;
+}
+#firstSec{
+    height: 250px;
+}
+#play{
+    width: auto;
+    height: 300px;
+}
+#content{
+    margin-top: 20px;
+    width: 100%;
+}
+#elementi{
+    margin-top: 20px;
+}
+ul{
+    list-style: none;
+}
+#tracksInfo{
+    margin-top: 100px;
+    width: auto;
+    height: 500px;
+}
+/* #tracksMidle{
+    margin-left:20px;
+    margin-right:20px;
+} */
+body{
+    width: 100%;
+    height: 100%;
+}
+#whole{
+    position: relative;
+}
+#carousel  img{
+    position: relative;
+    float: left;
+    width: 100%;
+    height: 200px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#carouselLinear{
+    width: 280px;
+}
+#carouselLinear img{
+    width: 280px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+#modBody{
+    z-index: 2;
+    color: black;
+}
+#modHead{
+    z-index: 2;
+    color: black;
+}
+#colorRed{
+    color: red;
+}
+#music{
+    opacity: 0.5;
+}
+#musicData{
+    padding-top: 50px;
+    height: 300px;
+    width: 100%;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 20px; 
+}
+#tabela{
+    width: 100%;
+    height: 300px;
+    font-size: 25px;
+}
+#ganreNames{
+    width: 100%;
+    font-size: 25px;
+    margin: 20px 0px;
+    border: none; 
+    border-collapse: collapse;
+}
+#ganreNames td + td {
+    border: 1px soild red;
+}
+#ganreNames {
+    background-color: transparent;
+    margin-bottom: 50px;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    border-collapse: separate;
+    border-spacing: 1px 5px;
+}
+#ganreMusic {
+    width: 100%;
+    border: 1px solid aliceblue;
+    border-radius: 10px; 
+    margin-top: 5px;
+}
+#ganreMusic a{
+    margin-right: 10px; 
+}
+#ganreMusic li{
+    margin-top: 10px; 
+}
+
+#musicRow td:first-child{
+    text-align: center;
+}
+#musicRow tr{
+    border-radius: 10px; 
+}
+#ganreRow td:first-child{
+    text-align: center;
+}
+#ganreRow tr{
+    border-radius: 10px; 
+}
+#ganreNames td + td{
+    background: lightblue;
+    color: black;
+}
+#ganreNames tr + tr{
+    background-color: lightblue;
+    border-radius: 10px;
+}
+#ganreNames tr{
+    border-radius: 10px;
+}
+
+.fa-music{
+    color: black;
+}
+#cart{
+    float: right;
+    font-size: 20px;
+    transition: 0.5s;
+    margin: 0 auto;
+
+}
+#cart:hover{
+    font-size: 35px; 
+}
+#buyP a{
+    text-decoration: none;
+    color: inherit;
+}
+#musicButton{
+    margin-right: 10px; 
+}
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    #musicData{
+        padding-top: 0px;
+        height: 250px;
+        width: 100%;
+        box-sizing: border-box;
+        margin-top: 0px;
+    }
+    #content {
+        height: 350px;
+        display: block;
+    }
+    #firstSec{
+        margin-bottom: 400px;  
+    }
+    #project-wrapper{
+        left: 10px;
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+    }
+    #musicData{
+        margin-top: 10px; 
+    }
+}

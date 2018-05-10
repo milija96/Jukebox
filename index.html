@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="css/audioplayer.css">
+    <script src="js/audioplayer.js"></script>
+    <script src="main.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <title>Document</title>
+</head>
+
+<body background="back2.jpg">
+    <header id="navigation-head">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+            <a class="navbar-brand" href="index.html">JukeBox</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+                aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="index.html">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="displayArtists()">Artists</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="displayGanre()">Ganre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" onclick="displayMusic()">Music</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <div id="whole" class="row col-md-12 col-lg-12 col-xs-12 container">
+        <div class="container col-xs-12" id="content">
+            <div id="firstSec" class="row flex-container col-md-12 col-lg-12" id="play">
+                <div id="carousel" class="carousel slide col-md-4 col-lg-4 col-sm-12" data-ride="carousel">
+                    <div class="container carousel-inner col-md-12 col-lg-12 col-sm-12" id="carouselLinear">
+                        <div class="carousel-item active" style="width: 320px; height: 200px;">
+                            <img class="d-block w-10" src="rock.png" alt="First slide">
+                        </div>
+                        <div class="carousel-item" style="width: 300px; height: 200px;">
+                            <img class="d-block w-100" src="pop-music.png" alt="Second slide">
+                        </div>
+                        <div class="carousel-item" style="width: 250px; height: 200px;">
+                            <img class="d-block w-100" src="narodna.png" alt="Third slide">
+                        </div>
+                        <div class="carousel-item" style="width: 300px; height: 200px;">
+                            <img class="d-block w-100" src="house.png" alt="Third slide">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <h2>Juke box</h2>
+                    <br>
+                    <span>
+                        <a href="#" id="punk" onclick="openPunk()">Punk /</a>
+                        <a href="#" id="rock" onclick="openRock()">Rock /</a>
+                        <a href="#" id="narodna" onclick="openNarodna()">Narodna /</a>
+                        <a href="#" id="house" onclick="openHouse()">House</a>
+                    </span>
+                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                        standard dummy text ever since the 1500s.</p>
+                </div>
+                <div id="reco" class="col col-sm-12 col-md-4 col-lg-4 col-sm-12">
+                </div>
+            </div>
+            <div class="row col-sm-12 col-md-12 col-lg-12" id="tracksInfo">
+                <div class="col-sm-12 col-lg-4" id="trendingTracks" style="border: 1px solid red">
+                </div>
+                <div class="col col-sm-12 col-lg-4" id="trendingArtists" style="border: 1px solid red">
+                </div>
+                <div class="col col-sm-12  col-lg-4" style="border: 1px solid red">
+                    <h2>Advertising</h2>
+                </div>
+            </div>
+        </div>
+        <div id="elementi" class=""></div>
+        <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" id="modHed" style="color : black">
+                        <h3>Music data</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" id="modBody">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="buyIt">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-3 col-xs-12" id="project-wrapper" style="width: 250px;">
+            <div id="project-container">
+                <div id="overlay"></div>
+                <div id="content">
+                    <div id="artName"></div>
+                    <div id="musName"></div>
+                    <input id="range" type="range" value="0" />
+                    <div id="controls" class="row">
+                        <div class="col">
+                            <i class="fa fa-refresh" aria-hidden="true"></i>
+                        </div>
+                        <div class="col">
+                            <i class="fa fa-step-backward" aria-hidden="true"></i>
+                        </div>
+                        <div class="col">
+                            <i class="fa fa-play play-btn fa-fw" aria-hidden="true"></i>
+                        </div>
+                        <div class="col">
+                            <i class="fa fa-step-forward" aria-hidden="true"></i>
+                        </div>
+                        <div class="col active">
+                            <i class="fa fa-random" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+    </footer>
+</body>
+
+</html>
