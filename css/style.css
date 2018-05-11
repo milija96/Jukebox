@@ -54,6 +54,7 @@ body{
     background-size: cover;
     overflow: hidden;
 }
+
 #modBody{
     z-index: 2;
     color: black;
@@ -84,7 +85,7 @@ body{
 #ganreNames{
     width: 100%;
     font-size: 25px;
-    margin: 20px 20px;
+    margin: 20px 0px;
     border: none; 
     border-collapse: collapse;
 }
@@ -103,7 +104,7 @@ body{
     width: 100%;
     border: 1px solid aliceblue;
     border-radius: 10px; 
-    margin-top: 20px; 
+    margin-top: 5px;
 }
 #ganreMusic a{
     margin-right: 10px; 
@@ -178,5 +179,7 @@ body{
         height: 200px;
         margin: 0 auto;
     }
-    #ganreNames{}
+    #musicData{
+        margin-top: 10px; 
+    }
 }

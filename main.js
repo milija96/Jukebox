@@ -4,6 +4,7 @@ $(document).ready(function(){
         $('.navbar-collapse').collapse('hide');
     });
 })
+$("#project-wrapper").slideUp();
 var xhttp1 = new XMLHttpRequest();
 xhttp1.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
@@ -11,7 +12,7 @@ xhttp1.onreadystatechange = function () {
         myReco(dataR);
     }
 };
-xhttp1.open("GET", "file.JSON", true);
+xhttp1.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
 xhttp1.send();
 
 function myReco(dataR){
@@ -35,8 +36,8 @@ function myReco(dataR){
     reco.innerHTML = recoData;
     function myRecoData(dataReClick){
     $("#project-wrapper").slideUp();
-    var plyArt = "<h2>";
-    var plyMus = "<h3>";
+    var plyArt = "<h4>";
+    var plyMus = "<h5>";
     plyArt += recom[dataReClick].izvodjacIme;
     plyMus += recom[dataReClick].naziv;
     modData = "";
@@ -51,8 +52,8 @@ function myReco(dataR){
         };
         xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + recom[dataReClick].id, true);
         xhttp.send();
-        plyArt += "</h2>";
-        plyMus += "</h3>";
+        plyArt += "</h4>";
+        plyMus += "</h5>";
         
         artName.innerHTML = plyArt;
         musName.innerHTML = plyMus;
@@ -86,8 +87,8 @@ function trMusic(data) {
         modData += data[dataTrending].pesmaNaziv + ": "+ data[dataTrending].cenaKolicina + "din";
         modBody.innerHTML = modData;
         document.getElementById("buyIt").addEventListener("click", function () {
-            var plyArt = "<h2>";
-            var plyMus = "<h3>";
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
             plyMus += data[dataTrending].pesmaNaziv;
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
@@ -97,8 +98,8 @@ function trMusic(data) {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[dataTrending].id, true);
             xhttp.send();
-            plyArt += "</h2>";
-            plyMus += "</h3>";
+            plyArt += "</h4>";
+            plyMus += "</h5>";
             
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
@@ -127,9 +128,9 @@ xhttpp.send();
 function trArtists(dataA) {
     var dataoutA = "<h2>Trending artists</h2><br>";
     for (var i = 0; i < dataA.length; i++) {
-        dataoutA += '<li style="border: 1px solid blue" onclick="displayMusicOfArt(' + i + ')">' + dataA[i].izvodjacIme + '</span></li><hr>';
+        dataoutA += '<p onclick="displayMusicOfArt(' + i + ')">' + dataA[i].izvodjacIme + '</span></p><hr>';
     }
-    dataoutA += "</ul>"
+    dataoutA += ""
     
     document.getElementById("trendingArtists").innerHTML = dataoutA;
         function displayMusicOfArt(dat) {
@@ -165,8 +166,8 @@ function trArtists(dataA) {
                 console.log(dat)
                 function myData(pased) {
                     $("#project-wrapper").slideUp();
-                    var plyArt = "<h2>";
-                    var plyMus = "<h3>";
+                    var plyArt = "<h4>";
+                    var plyMus = "<h5>";
                     plyArt += dat[pased].izvodjacIme;
                     plyMus += dat[pased].naziv;
                     modData = "";
@@ -181,8 +182,8 @@ function trArtists(dataA) {
                     };
                     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
                     xhttp.send();
-                    plyArt += "</h2>";
-                    plyMus += "</h3>";
+                    plyArt += "</h4>";
+                    plyMus += "</h5>";
                     
                     artName.innerHTML = plyArt;
                     musName.innerHTML = plyMus;
@@ -210,7 +211,7 @@ function openPunk() {
             console.log(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
     function myFunction(data) {
@@ -223,8 +224,8 @@ function openPunk() {
         }
         function myData(pased) {
             $("#project-wrapper").slideUp();
-            var plyArt = "<h2>";
-            var plyMus = "<h3>";
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
@@ -239,8 +240,8 @@ function openPunk() {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
             xhttp.send();
-            plyArt += "</h2>";
-            plyMus += "</h3>";
+            plyArt += "</h4>";
+            plyMus += "</h5>";
             
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
@@ -268,7 +269,7 @@ function openRock() {
             console.log(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
     function myFunction(data) {
@@ -281,8 +282,8 @@ function openRock() {
         }
         function myData(pased) {
             $("#project-wrapper").slideUp();
-            var plyArt = "<h2>";
-            var plyMus = "<h3>";
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
@@ -297,8 +298,8 @@ function openRock() {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
             xhttp.send();
-            plyArt += "</h2>";
-            plyMus += "</h3>";
+            plyArt += "</h4>";
+            plyMus += "</h5>";
             
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
@@ -325,7 +326,7 @@ function openNarodna() {
             console.log(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
     function myFunction(data) {
@@ -333,13 +334,13 @@ function openNarodna() {
         var out = "Narodna <ul>";
         for (var i = 0; i < data.length; i++) {
             if (data[i].zanrIme === "Narodna") {
-                out += "<li>" + data[i].naziv + "</li><br>"
+                out += "<li id='buyMus' data-toggle='modal' data-target='#basicModal' onclick='myData(" + i + ")'>" + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></li><hr>';
             }
         }
         function myData(pased) {
             $("#project-wrapper").slideUp();
-            var plyArt = "<h2>";
-            var plyMus = "<h3>";
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
@@ -354,8 +355,8 @@ function openNarodna() {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
             xhttp.send();
-            plyArt += "</h2>";
-            plyMus += "</h3>";
+            plyArt += "</h4>";
+            plyMus += "</h5>";
             
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
@@ -381,7 +382,7 @@ function openHouse() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
     function myFunction(data) {
@@ -394,8 +395,8 @@ function openHouse() {
         }
         function myData(pased) {
             $("#project-wrapper").slideUp();
-            var plyArt = "<h2>";
-            var plyMus = "<h3>";
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
@@ -410,8 +411,8 @@ function openHouse() {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
             xhttp.send();
-            plyArt += "</h2>";
-            plyMus += "</h3>";
+            plyArt += "</h4>";
+            plyMus += "</h5>";
             
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
@@ -437,7 +438,7 @@ function displayArtists() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
     function myFunction(data) {
@@ -452,7 +453,7 @@ function displayArtists() {
         var musName = document.getElementById("musName");
         // whole.style.display = "flex";
         content.setAttribute("class", "col-md-3 col-lg-3 col-sm-12")
-        elementi.setAttribute("class", "col-md-6 col-lg-7 col-sm-12")
+        elementi.setAttribute("class", "col-md-7 col-lg-7 col-sm-12")
         ////Nalazi samo razlicidatate vrijednosti i stavlja ih u niz unique
         for (var i = 0; i < data.length; i++) {
             if (unique.indexOf(data[i].izvodjacIme) === -1) {
@@ -491,8 +492,8 @@ function displayArtists() {
             }
             function myData(data) {
                 $("#project-wrapper").slideUp();
-                var plyArt = "<h2>";
-                var plyMus = "<h3>";
+                var plyArt = "<h4>";
+                var plyMus = "<h5>";
                 plyArt += dataArt[data].izvodjacIme;
                 plyMus += dataArt[data].naziv;
                 modData = "";
@@ -508,8 +509,8 @@ function displayArtists() {
                     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
                     xhttp.send();
                     console.log(plyArt)
-                    plyArt += "</h2>";
-                    plyMus += "</h3>";
+                    plyArt += "</h4>";
+                    plyMus += "</h5>";
                     
                     artName.innerHTML = plyArt;
                     musName.innerHTML = plyMus;
@@ -596,8 +597,8 @@ function displayGanre() {
             }
             function geData(data) {
                 $("#project-wrapper").slideUp();
-                var plyArt = "<h2>";
-                var plyMus = "<h3>";
+                var plyArt = "<h4>";
+                var plyMus = "<h5>";
                 plyArt += genreData[data].izvodjacIme;
                 plyMus += genreData[data].naziv;
                 modData = "";
@@ -614,8 +615,8 @@ function displayGanre() {
                     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + genreData[data].id, true);
                     xhttp.send();
 
-                    plyArt += "</h2>";
-                    plyMus += "</h3>";
+                    plyArt += "</h4>";
+                    plyMus += "</h5>";
                     
                     artName.innerHTML = plyArt;
                     musName.innerHTML = plyMus;
@@ -667,8 +668,8 @@ function displayMusic() {
         console.log(data)
         function myData(pased) {
             $("#project-wrapper").slideUp();
-            var plyArt = "<h2>";
-            var plyMus = "<h3>";
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
@@ -683,8 +684,8 @@ function displayMusic() {
             };
             xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
             xhttp.send();
-            plyArt += "</h2>";
-            plyMus += "</h3>";
+            plyArt += "</h4>";
+            plyMus += "</h5>";
             
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
