@@ -157,6 +157,27 @@ body{
 #musicButton{
     margin-right: 10px; 
 }
+.modal-lg{
+    max-width: 60% ;
+}
+#sing-in{
+    padding-top: 20px;
+    margin: 20px 20px;
+    text-align: center;
+    background:rgba(255,255,255,0.05);
+}
+
+#sing-up{
+    padding: 20px 20px;
+    margin: 20px 20px;
+    text-align: center;
+    background:rgba(255,255,255,0.05);
+}
+#singInModal{
+    background: url('/singForm.jpg') no-repeat;
+    background-size: cover;
+    height: auto;
+}
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     #musicData{

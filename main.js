@@ -104,8 +104,8 @@ function trMusic(data) {
             artName.innerHTML = plyArt;
             musName.innerHTML = plyMus;
     
-                    $("#basicModal").removeClass('fade').modal('hide')
-                    $("#project-wrapper").slideDown();
+            $("#basicModal").removeClass('fade').modal('hide')
+            $("#project-wrapper").slideDown();
         }
         
         )
@@ -154,7 +154,7 @@ function trArtists(dataA) {
                     myFunction(data);
                 }
             };
-            xhttp.open("GET", "file.JSON", true);
+            xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
             xhttp.send();
         
             function myFunction(data) {
@@ -266,7 +266,6 @@ function openRock() {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
             myFunction(data);
-            console.log(data);
         }
     };
     xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
@@ -508,7 +507,6 @@ function displayArtists() {
                     };
                     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
                     xhttp.send();
-                    console.log(plyArt)
                     plyArt += "</h4>";
                     plyMus += "</h5>";
                     
@@ -547,11 +545,11 @@ function displayGanre() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "file.JSON", true);
+    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
     xhttp.send();
 
-
     function myFunction(data) {
+        console.log(data)
         var artName = document.getElementById("artName");
         var musName = document.getElementById("musName");
         var modBody = document.getElementById("modBody");
@@ -571,8 +569,6 @@ function displayGanre() {
             output += '<tr id="ganreRow"><td>'+'<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
             
         }
-
-        console.log(data)
         function selectedArtists(id) {
             $("#project-wrapper").slideUp();
             var genreData = [];
@@ -702,7 +698,64 @@ function displayMusic() {
         document.getElementById("elementi").innerHTML = empty;
     }
 }
+ function singUp(){
+    event.preventDefault();
+    var id = "";
+    var emailValue = "";
+    var passwordValue = ""
+    var elements = document.getElementById("sing-up-form").elements;
+    for(var i=0;i<elements.length;i++){
+        emailValue = elements[0].value;
+        passwordValue = elements[1].value;
+    }
+    var obj = {email: emailValue, password: passwordValue}
+    // console.log(obj)
+    var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                }
+            };
+            xhttp.open("POST", "http://demo4810698.mockable.io/test", true,);
+            xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhttp.send(JSON.stringify({obj}));
+            console.log(obj);
+            
+}
+function singIn(){
+    event.preventDefault();
+    var id = "";
+    var emailValue = "";
+    var passwordValue = ""
+    var elements = document.getElementById("sing-in-form").elements;
+    for(var i=0;i<elements.length;i++){
+        emailValue = elements[0].value;
+        passwordValue = elements[1].value;
+    }
+    var obj = {email: emailValue, password: passwordValue}
+    // console.log(obj)
+    var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                }
+            };
+            xhttp.open("POST", "http://demo4810698.mockable.io/test", true,);
+            xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhttp.send(JSON.stringify({obj}));
+            console.log(obj);
+}
+function changeIt(){
+    var navbar = document.getElementById("navBar");
+    var singIn = document.getElementById("singInModal");
+    singIn.style.backgroundImage = "url('/singForm2.jpg')"
+    navbar.classList.remove("bg-dark");
+    navbar.classList.add("bg-primary");
 
+    if (typeof(Storage) !== "undefined") {
+        
+    }
+}
 $(document).ready(function () {
     $("#carousel").carousel({
         interval: 2000

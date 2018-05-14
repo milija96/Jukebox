@@ -22,7 +22,7 @@
 
 <body background="back2.jpg">
     <header id="navigation-head">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" id="navBar">
             <a class="navbar-brand" href="index.html">JukeBox</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -44,6 +44,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="displayMusic()">Music</a>
                     </li>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-in-modal'>Sing in</a>
+                        </li>
+                    </ul>
                 </ul>
             </div>
         </nav>
@@ -85,14 +90,15 @@
             <div class="row col-sm-12 col-md-12 col-lg-12" id="tracksInfo">
                 <div class="col-sm-12 col-lg-4" id="trendingTracks">
                 </div>
-                <div class="col col-sm-12 col-lg-4" id="trendingArtists" >
+                <div class="col col-sm-12 col-lg-4" id="trendingArtists">
                 </div>
-                <div class="col col-sm-12  col-lg-4" >
+                <div class="col col-sm-12  col-lg-4">
                     <h2>Advertising</h2>
                 </div>
             </div>
         </div>
         <div id="elementi" class=""></div>
+        <button class="btn" onclick="changeIt()">Change</button>
         <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -134,6 +140,42 @@
                         </div>
                         <div class="col active">
                             <i class="fa fa-random" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="sing-in-modal" tabindex="-1" role="dialog" aria-labelledby="sing-in-modal" aria-hidden="true">
+            <div class="modal-dialog modal-lg" id="sing-in-content">
+                <div class="modal-content" id="singInModal">
+                    <div class="container col-md-12">
+                        <div class="row">
+                            <div class="col form-group" id="sing-in">
+                                <form action="" method="POST" id="sing-in-form">
+                                    <h2>Sing in</h2>
+                                    <input type="email" class="form-control" id="singInUser" aria-describedby="userHelp" placeholder="Enter email">
+                                    <br>
+                                    <input type="password" class="form-control" id="singInPassw" placeholder="Password">
+                                    <br>
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" id="singInBtn" class="btn btn-success btn-lg" onclick="singIn()">SING IN</button>
+                                        <button type="reset" id="resetInBtn" class="btn btn-danger btn-lg">RESET</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col form-group" id="sing-up">
+                                <form action="" method="POST" id="sing-up-form">
+                                    <h2>Sing up</h2>
+                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <br>
+                                    <input type="password" class="form-control" id="singUpPassw" placeholder="Password">
+                                    <br>
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>
+                                        <button type="reset" id="resetUpBtn" class="btn btn-danger btn-lg">RESET</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
