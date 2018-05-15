@@ -22,15 +22,16 @@
 
 <body background="back2.jpg">
     <header id="navigation-head">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between" id="navBar">
-            <a class="navbar-brand" href="index.html">JukeBox</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navBar">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item ">
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
                         <a class="nav-link" href="index.html">Home
                             <span class="sr-only">(current)</span>
                         </a>
@@ -44,13 +45,28 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="displayMusic()">Music</a>
                     </li>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-in-modal'>Sing in</a>
-                        </li>
-                    </ul>
+
                 </ul>
+                <div class="nav navbar-nav navbar-right" id="navBar">
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        Styles
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" onclick="changeIt1()">Style 1</a>
+                        <a class="dropdown-item" href="#" onclick="changeIt2()">Style 2</a>
+                        <a class="dropdown-item" href="#" onclick="changeIt3()">Style 3</a>
+                        <a class="dropdown-item" href="#" onclick="changeIt4()">Style 4</a>
+                    </div>
+                    </div>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-in-modal'>Sing in</a>
+                    </li>
+                </div>
             </div>
+            </div>
+        </div>
         </nav>
     </header>
     <div id="whole" class="row col-md-12 col-lg-12 col-xs-12 container">
@@ -98,7 +114,6 @@
             </div>
         </div>
         <div id="elementi" class=""></div>
-        <button class="btn" onclick="changeIt()">Change</button>
         <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -181,6 +196,8 @@
                 </div>
             </div>
         </div>
+    </div>
+
     </div>
     <footer>
     </footer>

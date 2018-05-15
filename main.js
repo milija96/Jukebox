@@ -1,4 +1,6 @@
 //////recomended
+
+
 $(document).ready(function(){
     $('.navbar-nav>li>a').on('click', function(){
         $('.navbar-collapse').collapse('hide');
@@ -745,19 +747,72 @@ function singIn(){
             xhttp.send(JSON.stringify({obj}));
             console.log(obj);
 }
-function changeIt(){
+function changeIt1(){
     var navbar = document.getElementById("navBar");
-    var singIn = document.getElementById("singInModal");
-    singIn.style.backgroundImage = "url('/singForm2.jpg')"
-    navbar.classList.remove("bg-dark");
-    navbar.classList.add("bg-primary");
-
+    var btn = document.getElementById("dropdownMenuButton");
+    navbar.setAttribute("class", "navbar navbar-expand-lg navbar-dark bg-primary");
+    btn.setAttribute("class", "btn btn-primary dropdown-toggle")
     if (typeof(Storage) !== "undefined") {
-        
+        sessionStorage.setItem("col", "");
+        sessionStorage.setItem("btn", "");
+        sessionStorage.setItem("col" , "navbar navbar-expand-lg navbar-dark bg-primary");
+        sessionStorage.setItem("btn", "btn btn-primary dropdown-toggle");
     }
+}
+function changeIt2(){
+    var navbar = document.getElementById("navBar");
+    var btn = document.getElementById("dropdownMenuButton");
+    navbar.setAttribute("class", "navbar navbar-expand-lg navbar-dark bg-danger");
+    btn.setAttribute("class", "btn btn-danger dropdown-toggle")
+    if (typeof(Storage) !== "undefined") {
+        sessionStorage.setItem("col", "")
+        sessionStorage.setItem("btn", "");
+        sessionStorage.setItem("col" , "navbar navbar-expand-lg navbar-dark bg-danger");
+        sessionStorage.setItem("btn", "btn btn-danger dropdown-toggle");
+
+    }
+    console.log(sessionStorage.getItem('key'))
+}
+function changeIt3(){
+    var navbar = document.getElementById("navBar");
+    var btn = document.getElementById("dropdownMenuButton");
+    navbar.setAttribute("class", "navbar navbar-expand-lg navbar-dark bg-warning");
+    btn.setAttribute("class", "btn btn-warning dropdown-toggle")
+    if (typeof(Storage) !== "undefined") {
+        sessionStorage.setItem("col", "")
+        sessionStorage.setItem("btn", "");
+        sessionStorage.setItem("col" , "navbar navbar-expand-lg navbar-dark bg-warning");
+        sessionStorage.setItem("btn", "btn btn-warning dropdown-toggle");
+
+    }
+    navbar.setAttribute("class", sessionStorage.getItem('col'))
+}
+function changeIt4(){
+    var navbar = document.getElementById("navBar");
+    var btn = document.getElementById("dropdownMenuButton");
+    navbar.setAttribute("class", "navbar navbar-expand-lg navbar-dark bg-default");
+    btn.setAttribute("class", "btn btn-default dropdown-toggle")
+    if (typeof(Storage) !== "undefined") {
+        sessionStorage.setItem("col", "")
+        sessionStorage.setItem("btn", "");
+        sessionStorage.setItem("col" , "navbar navbar-expand-lg navbar-dark bg-default");
+        sessionStorage.setItem("btn", "btn btn-default dropdown-toggle");
+
+    }
+    navbar.setAttribute("class", sessionStorage.getItem('col'))
 }
 $(document).ready(function () {
     $("#carousel").carousel({
         interval: 2000
     });
+    var navbar = document.getElementById("navBar");
+    var btn = document.getElementById("dropdownMenuButton");
+    if(sessionStorage.getItem('col') === null && sessionStorage.getItem('btn') === null){
+        navbar.setAttribute("class", "navbar navbar-expand-lg navbar-dark bg-dark");
+        btn.setAttribute("class", "btn btn-secondary dropdown-toggle");
+    }
+    else{
+        navbar.setAttribute("class", sessionStorage.getItem('col'))
+        btn.setAttribute("class", sessionStorage.getItem('btn'))
+    }
 });
