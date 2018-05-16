@@ -63,9 +63,6 @@ body{
     z-index: 2;
     color: black;
 }
-#colorRed{
-    color: red;
-}
 #music{
     opacity: 0.5;
 }
@@ -178,6 +175,7 @@ body{
     background-size: cover;
     height: auto;
 }
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     #musicData{

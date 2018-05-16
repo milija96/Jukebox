@@ -2,7 +2,8 @@
 <html lang="en">
 
 <head>
-    <title>Bootstrap Example</title>
+    <title>JukeBox</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" title="main">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -12,18 +13,29 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
         crossorigin="anonymous">
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" title="main">
+    <link href="" rel="stylesheet" title="main">
     <link rel="stylesheet" href="css/audioplayer.css">
+    <link rel="shortcut icon" href="">
     <script src="js/audioplayer.js"></script>
     <script src="main.js"></script>
+    <script>
+                sessionStorage.getItem("theme")
+                var theme = sessionStorage.getItem("theme");
+                console.log(theme)
+                setTheme(theme);
+        
+        </script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
+
+    </script>
 </head>
 
 <body background="back2.jpg">
     <header id="navigation-head">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navBar">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="#">JukeBox</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -49,16 +61,16 @@
                 </ul>
                 <div class="nav navbar-nav navbar-right" id="navBar">
                     <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        Styles
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#" onclick="changeIt1()">Style 1</a>
-                        <a class="dropdown-item" href="#" onclick="changeIt2()">Style 2</a>
-                        <a class="dropdown-item" href="#" onclick="changeIt3()">Style 3</a>
-                        <a class="dropdown-item" href="#" onclick="changeIt4()">Style 4</a>
-                    </div>
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">
+                            Styles
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a id="style1" class="dropdown-item" href="#" onclick="changeIt()" rel="united">Style 1</a>
+                            <a id="style2" class="dropdown-item" href="#" onclick="changeIt()" rel="lux">Style 2</a>
+                            <a id="style3" class="dropdown-item" href="#" onclick="changeIt()" rel="materia">Style 3</a>
+                            <a id="style4" class="dropdown-item" href="#" onclick="changeIt()" rel="yeti">Style 4</a>
+                        </div>
                     </div>
                     <li class="nav-item ">
                         <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-in-modal'>Sing in</a>
@@ -66,10 +78,10 @@
                 </div>
             </div>
             </div>
-        </div>
+            </div>
         </nav>
     </header>
-    <div id="whole" class="row col-md-12 col-lg-12 col-xs-12 container">
+    <div id="whole" class="container row col-md-12 col-lg-12 col-xs-12">
         <div class="container col-xs-12" id="content">
             <div id="firstSec" class="row flex-container col-md-12 col-lg-12" id="play">
                 <div id="carousel" class="carousel slide col-md-4 col-lg-4 col-sm-12" data-ride="carousel">
@@ -201,6 +213,8 @@
     </div>
     <footer>
     </footer>
+    <script>
+    </script>
 </body>
 
 </html>
