@@ -3,29 +3,19 @@
 
 <head>
     <title>JukeBox</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" title="main">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9"
-        crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" title="main">
-    <link href="" rel="stylesheet" title="main">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/audioplayer.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
+        crossorigin="anonymous">
     <link rel="shortcut icon" href="">
     <script src="js/audioplayer.js"></script>
     <script src="main.js"></script>
-    <script>
-                sessionStorage.getItem("theme")
-                var theme = sessionStorage.getItem("theme");
-                console.log(theme)
-                setTheme(theme);
-        
-        </script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <title>Document</title>
 
@@ -34,7 +24,7 @@
 
 <body background="back2.jpg">
     <header id="navigation-head">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="navBar">
+        <nav class="navbar navbar-expand-lg navbar-dark def" id="navBar">
             <a class="navbar-brand" href="#">JukeBox</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
@@ -66,14 +56,14 @@
                             Styles
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a id="style1" class="dropdown-item" href="#" onclick="changeIt()" rel="united">Style 1</a>
-                            <a id="style2" class="dropdown-item" href="#" onclick="changeIt()" rel="lux">Style 2</a>
-                            <a id="style3" class="dropdown-item" href="#" onclick="changeIt()" rel="materia">Style 3</a>
-                            <a id="style4" class="dropdown-item" href="#" onclick="changeIt()" rel="yeti">Style 4</a>
+                            <a id="style1" class="dropdown-item" href="#" onclick="changeIt()" rel="red">Style 1</a>
+                            <a id="style2" class="dropdown-item" href="#" onclick="changeIt()" rel="blue">Style 2</a>
+                            <a id="style3" class="dropdown-item" href="#" onclick="changeIt()" rel="lightblue">Style 3</a>
+                            <a id="style4" class="dropdown-item" href="#" onclick="changeIt()" rel="yellow">Style 4</a>
                         </div>
                     </div>
                     <li class="nav-item ">
-                        <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-in-modal'>Sing in</a>
+                        <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
                     </li>
                 </div>
             </div>
@@ -116,7 +106,10 @@
                 </div>
             </div>
             <div class="row col-sm-12 col-md-12 col-lg-12" id="tracksInfo">
-                <div class="col-sm-12 col-lg-4" id="trendingTracks">
+                <div class="loader">
+                </div>
+                <div class="col-sm-12 col-lg-4" id="trendingTracks" style="border: 1px solid red">
+
                 </div>
                 <div class="col col-sm-12 col-lg-4" id="trendingArtists">
                 </div>
@@ -172,7 +165,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="sing-in-modal" tabindex="-1" role="dialog" aria-labelledby="sing-in-modal" aria-hidden="true">
+        <div class="modal fade" id="sing-modal" tabindex="-1" role="dialog" aria-labelledby="sing-in-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" id="sing-in-content">
                 <div class="modal-content" id="singInModal">
                     <div class="container col-md-12">
@@ -209,6 +202,8 @@
             </div>
         </div>
     </div>
+    </div>
+    <div class="loaer">
 
     </div>
     <footer>

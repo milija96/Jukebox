@@ -8,6 +8,10 @@ $(document).ready(function () {
     $('.navbar-nav>li>').on('click', function () {
         $('.navbar-collapse').collapse('hide');
     });
+    var curentTheme = document.getElementById("navBar").classList.item(3);
+    document.getElementById("navBar").classList.toggle(curentTheme, false);
+    document.getElementById("navBar").classList.toggle(sessionStorage.getItem("theme"), true);
+
 })
 /////recomendations by me
 $("#project-wrapper").slideUp();
@@ -83,6 +87,16 @@ xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/top
 xhttp.send();
 
 function trMusic(data) {
+    document.onreadystatechange = function () {
+        var state = document.readyState
+        if (state = 'interactive') {
+            document.getElementById('trendingTracks').style.visibility = "hidden";
+        } else if (state == 'complete') {
+            document.getElementById('interactive');
+            document.getElementById('loader').style.visibility = "hidden";
+            document.getElementById('trendingTracks').style.visibility = "visible";
+        }
+    }
     var dataout = "<h2>Trending music</h2><br>";
     for (var i = 0; i < data.length; i++) {
         dataout += '<p  data-toggle="modal" data-target="#basicModal" onclick="myTrendMusic(' + i + ')">' + data[i].pesmaNaziv + '</span><i style="float: right" class="fa fa-play fa spin"></i></p><hr>';
@@ -448,7 +462,7 @@ function displayArtists() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+    xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
     function myFunction(data) {
@@ -471,7 +485,7 @@ function displayArtists() {
             }
         }
         for (var i = 0; i < unique.length; i++) {
-            output += '<tr id="musicRow"><td>' + '<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
+            output += '<tr id="musicRow" class=""><td>' + '<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + i + ')">' + unique[i] + "</td></tr>"
         }
         function selectedArtists(id) {
             var dataArt = [];
@@ -666,7 +680,6 @@ function displayMusic() {
     };
     xhttp.open("GET", "file.JSON", true);
     xhttp.send();
-
     function myFunction(data) {
         var output = "<ul id='myUl'>";
         var empty = "";
@@ -721,18 +734,15 @@ function singUp() {
         emailValue = elements[0].value;
         passwordValue = elements[1].value;
     }
-    var obj = { email: emailValue, password: passwordValue }
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
         }
     };
-    xhttp.open("POST", "http://demo4810698.mockable.io/test", true, );
+    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/korisnici", true, );
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhttp.send(JSON.stringify({ obj }));
-    console.log(obj);
-
+    xhttp.send(JSON.stringify({ email: emailValue, sifra: passwordValue }));
 }
 /////////////sing in form function
 function singIn() {
@@ -745,41 +755,37 @@ function singIn() {
         emailValue = elements[0].value;
         passwordValue = elements[1].value;
     }
-    var obj = { email: emailValue, password: passwordValue }
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function ()
+    {
         if (this.readyState == 4 && this.status == 200) {
-            var data = JSON.parse(this.responseText);
+            var data = this.responseText;
+            localStorage.setItem('token', data)
+            
         }
+       
     };
-    xhttp.open("POST", "http://demo4810698.mockable.io/test", true, );
+    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/korisnici/login", true, );
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-    xhttp.send(JSON.stringify({ obj }));
-    console.log(obj);
+    xhttp.send(JSON.stringify({email: emailValue, sifra: passwordValue}));
+    var e = localStorage.getItem("token");
+    function stateS(stat){
+
+    }
 }
-///////////next 4 functions are used to change the style of the page, and save propertyes in session storage
+///////////the next function is used to change the style of the page, and save propertyes in session storage
 function changeIt() {
     var clicked = document.activeElement;
     var themeName = clicked.getAttribute("rel");
-    var theme = "https://stackpath.bootstrapcdn.com/bootswatch/4.1.1/" + themeName + "/bootstrap.min.css";
+    var theme = themeName;
     setTheme(theme);
 }
 function setTheme(theme) {
-    $('link[title="main"]').attr('href', theme);
-    var supports = supportsHtml5();
-    if (supports === true) {
-        sessionStorage.theme = theme;
-    }
+    var curentTheme = document.getElementById("navBar").classList.item(3);
+    document.getElementById("navBar").classList.toggle(curentTheme, false);
+    document.getElementById("navBar").classList.toggle(theme, true);
+    sessionStorage.theme = theme;
 }
-function supportsHtml5() {
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
-}
-var supports = supportsHtml5();
-
 $(document).ready(function () {
     $("#carousel").carousel({
         interval: 2000
