@@ -749,8 +749,11 @@ function singIn() {
     event.preventDefault();
     var id = "";
     var emailValue = "";
-    var passwordValue = ""
+    var passwordValue = "";
+    var empty = "";
+    var mesagge = "Wrong credentials";
     var elements = document.getElementById("sing-in-form").elements;
+    document.getElementById("msg").innerHTML = empty;
     for (var i = 0; i < elements.length; i++) {
         emailValue = elements[0].value;
         passwordValue = elements[1].value;
@@ -758,19 +761,22 @@ function singIn() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function ()
     {
+        var stat = xhttp.status;
+        status(stat);
         if (this.readyState == 4 && this.status == 200) {
             var data = this.responseText;
             localStorage.setItem('token', data)
             
         }
-       
+  
     };
     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/korisnici/login", true, );
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.send(JSON.stringify({email: emailValue, sifra: passwordValue}));
-    var e = localStorage.getItem("token");
-    function stateS(stat){
-
+    function status(stat){
+        if(stat === 403 || stat === 0){
+            document.getElementById("msg").innerHTML = mesagge;
+        }
     }
 }
 ///////////the next function is used to change the style of the page, and save propertyes in session storage
