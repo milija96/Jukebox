@@ -2,6 +2,7 @@
     box-sizing: border-box;
     color: white;
 }
+
 #firstSec{
     height: 250px;
 }
@@ -187,7 +188,7 @@ body{
     color: white;
 }
 .lightblue{
-    background: green;
+    background: lightblue;
 }
 .yellow{
     background: orange;
@@ -207,6 +208,9 @@ body{
     width: 2em;
     overflow: show;
 
+}
+#msg{
+    padding-top: 5px; 
 }
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }

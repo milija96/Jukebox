@@ -11,18 +11,21 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/audioplayer.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" 
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="shortcut icon" href="">
     <script src="js/audioplayer.js"></script>
     <script src="main.js"></script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
-    <title>Document</title>
+    <style>
+        .no-fuoc {
+            display: none
+        }
+    </style>
 
-    </script>
 </head>
 
-<body background="back2.jpg">
+<body background="back2.jpg" id="body">
+
     <header id="navigation-head">
         <nav class="navbar navbar-expand-lg navbar-dark def" id="navBar">
             <a class="navbar-brand" href="#">JukeBox</a>
@@ -39,13 +42,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="displayArtists()">Artists</a>
+                        <a class="nav-link" href="#" onclick="displayArtists()" rel="Artists" id="art">Artists</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="displayGanre()">Ganre</a>
+                        <a class="nav-link" href="#" onclick="displayGanre()" rel="Ganre" id="gen">Ganre</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="displayMusic()">Music</a>
+                        <a class="nav-link" href="#" onclick="displayMusic()" rel="Music" id="mus">Music</a>
                     </li>
 
                 </ul>
@@ -64,6 +67,9 @@
                     </div>
                     <li class="nav-item ">
                         <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" onclick="singOut()">Sing out</a>
                     </li>
                 </div>
             </div>
@@ -165,7 +171,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="sing-modal" tabindex="-1" role="dialog" aria-labelledby="sing-in-modal" aria-hidden="true">
+        <div class="modal fade" id="sing-modal" tabindex="-1" role="dialog" aria-labelledby="sing-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" id="sing-in-content">
                 <div class="modal-content" id="singInModal">
                     <div class="container col-md-12">
@@ -210,6 +216,18 @@
     <footer>
     </footer>
     <script>
+    </script>
+    <script>
+        document.documentElement.className = 'no-fouc';
+        if (localStorage.getItem("funct") !== null) {
+            funct = localStorage.getItem("funct");
+            window[funct]();
+        }
+        var newTheme = sessionStorage.getItem("theme");
+        setTheme(newTheme);
+        $(document).ready(function () {
+            $('.no-fouc').removeClass('no-fouc');
+        }); 
     </script>
 </body>
 
