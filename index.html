@@ -3,6 +3,7 @@
 
 <head>
     <title>JukeBox</title>
+    <style type="text/css">body {visibility: hidden;}</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,10 +26,9 @@
 </head>
 
 <body background="back2.jpg" id="body">
-
     <header id="navigation-head">
         <nav class="navbar navbar-expand-lg navbar-dark def" id="navBar">
-            <a class="navbar-brand" href="#">JukeBox</a>
+            <a class="navbar-brand" href="index.html" rel="Home" onclick="displayHome()">JukeBox</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,9 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="index.html">Home
-                            <span class="sr-only">(current)</span>
-                        </a>
+                        <a class="nav-link" href="index.html" rel="Home" onclick="displayHome()">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="displayArtists()" rel="Artists" id="art">Artists</a>
@@ -189,6 +187,7 @@
                                     </div>
                                 </form>
                                 <p id="msg"></p>
+                                <button class="btn btn-success" id="new" onclick="showSing()">Sing up</button>
                             </div>
                             <div class="col form-group" id="sing-up">
                                 <form action="" method="POST" id="sing-up-form">
@@ -211,23 +210,19 @@
     </div>
     </div>
     <div class="loaer">
-
     </div>
+
     <footer>
     </footer>
     <script>
     </script>
     <script>
         document.documentElement.className = 'no-fouc';
-        if (localStorage.getItem("funct") !== null) {
-            funct = localStorage.getItem("funct");
-            window[funct]();
-        }
         var newTheme = sessionStorage.getItem("theme");
         setTheme(newTheme);
         $(document).ready(function () {
             $('.no-fouc').removeClass('no-fouc');
-        }); 
+        });
     </script>
 </body>
 

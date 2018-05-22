@@ -1,4 +1,13 @@
-
+function remain() {
+    var clicked = document.activeElement;
+    var attr = clicked.getAttribute("rel");
+    console.log(clicked)
+    if(attr !== null){
+    funct = "display"+attr+"";
+    localStorage.funct = funct;
+    console.log(funct)
+    }
+}
 $(document).ready(function () {
     $('.navbar-nav>li>a').on('click', function () {
         $('.navbar-collapse').collapse('hide');
@@ -7,7 +16,7 @@ $(document).ready(function () {
         $('.navbar-collapse').collapse('hide');
     });
     if(localStorage.getItem("funct") !== null){
-        funct = localStorage.getItem("funct");
+        var funct = localStorage.getItem("funct");
         window[funct]();
     }
 })
@@ -457,7 +466,7 @@ function displayArtists() {
     xhttp.send();
     var tag = document.getElementById("art");
 
-    remain(tag)
+    remain()
 
     function myFunction(data) {
         var unique = [];
@@ -469,7 +478,6 @@ function displayArtists() {
         var modBody = document.getElementById("modBody");
         var artName = document.getElementById("artName");
         var musName = document.getElementById("musName");
-        var elements = document.getElementById("sing-in-form").elements;
 
         var token = localStorage.getItem("token");
 
@@ -524,9 +532,7 @@ function displayArtists() {
                 plyArt += dataArt[data].izvodjacIme;
                 plyMus += dataArt[data].naziv;
 
-                for (var i = 0; i < elements.length; i++) {
-                    modUser += elements[0].value;
-                }
+
                 modData = "";
                 modData += dataArt[data].izvodjacIme + ": " + dataArt[data].naziv + "<br>Cena: " + dataArt[data].cenaKolicina + "din<br>You are logged as:" + modUser;
                 modBody.innerHTML = modData;
@@ -586,7 +592,7 @@ function displayGanre() {
             myFunction(data);
         }
     };
-    xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme", true);
+    xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
     remain()
@@ -692,6 +698,13 @@ function displayMusic() {
     var tag = document.getElementById("mus");
     content.setAttribute("class", "col-md-6");
     elementi.setAttribute("class", "col-md-6");
+
+    var node = document.createElement("p");
+    var textnode = document.createTextNode("water");
+    node.appendChild(textnode);
+    content.appendChild(node);
+
+
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
@@ -702,13 +715,13 @@ function displayMusic() {
     xhttp.open("GET", "file.JSON", true);
     xhttp.send();
 
-    remain(tag)
+    remain()
 
     function myFunction(data) {
-        var output = "<ul id='myUl'>";
+        var output = "";
         var empty = "";
         for (var i = 0; i < data.length; i++) {
-            output += '<li id="buyMus" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></li><hr>';
+            output += '<p id="buyMus" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></p><hr>';
         }
         console.log(data)
         function myData(pased) {
@@ -742,7 +755,7 @@ function displayMusic() {
 
         }
         window.myData = myData;
-        output += "</ul>"
+        // output += "</ul>"
         document.getElementById("content").innerHTML = output;
         document.getElementById("elementi").innerHTML = empty;
     }
@@ -835,13 +848,23 @@ function singOut() {
         
     }
 }
-function remain(tag) {
-    // var clicked = document.activeElement;
-    console.log(tag)
-    var attr = tag.getAttribute("rel");
+function remain() {
+    var clicked = document.activeElement;
+    var attr = clicked.getAttribute("rel");
+    console.log(clicked)
+    if(attr !== null){
     funct = "display"+attr+"";
     localStorage.funct = funct;
-    console.log(tag)
+    console.log(funct)
+    }
+}
+function displayHome(){
+    localStorage.removeItem("funct")
+}
+function showSing(){
+    console.log("W")
+    var singUp = document.getElementById("sing-up");
+    $(singUp).slideToggle();
 }
 $(document).ready(function () {
     $("#carousel").carousel({

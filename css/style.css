@@ -156,7 +156,7 @@ body{
     margin-right: 10px; 
 }
 .modal-lg{
-    max-width: 60% ;
+    max-width: 40% ;
 }
 #sing-in{
     padding-top: 20px;
@@ -175,6 +175,13 @@ body{
     background: url('/singForm.jpg') no-repeat;
     background-size: cover;
     height: auto;
+    max-width: 100%;
+}
+#sing-up{
+    display: none;
+}
+#new{
+    margin-bottom: 10px;
 }
 .def{
     background: lightslategray;
@@ -212,6 +219,9 @@ body{
 #msg{
     padding-top: 5px; 
 }
+.alert{
+    display: none;
+}
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
@@ -245,5 +255,25 @@ body{
     }
     #musicData{
         margin-top: 10px; 
+    }
+    .modal-lg{
+        max-width: 100%;
+    }
+    #singInModal{
+        display: flex;
+        flex-direction: column;
+    }
+    #content{
+        margin-right: -40px;
+        margin-left: 14px;
+        max-height: 20%;
+    }
+    #elementi{
+        margin-right: -40px;
+        margin-left: 14px;
+    }
+    #elementi ul{
+        padding-left: 5px;
+        padding-top: 5px;
     }
 }
