@@ -2,12 +2,27 @@ function remain() {
     var clicked = document.activeElement;
     var attr = clicked.getAttribute("rel");
     console.log(clicked)
-    if(attr !== null){
-    funct = "display"+attr+"";
-    localStorage.funct = funct;
-    console.log(funct)
+    if (attr !== null) {
+        funct = "display" + attr + "";
+        localStorage.funct = funct;
+        console.log(funct)
     }
 }
+
+function showSpiner() {
+    var whole = document.getElementById("whole");
+    var spiner = document.getElementById("spiner");
+    spiner.style.visibility = "visible";
+}
+function hideSpiner() {
+    var whole = document.getElementById("whole");
+    var spiner = document.getElementById("spiner");
+    whole.style.visibility = "visible";
+    spiner.style.visibility = "hidden";
+}
+setInterval(hideSpiner, 1200);
+setTimeout(showSpiner, 0);
+
 $(document).ready(function () {
     $('.navbar-nav>li>a').on('click', function () {
         $('.navbar-collapse').collapse('hide');
@@ -15,10 +30,6 @@ $(document).ready(function () {
     $('.navbar-nav>li>').on('click', function () {
         $('.navbar-collapse').collapse('hide');
     });
-    if(localStorage.getItem("funct") !== null){
-        var funct = localStorage.getItem("funct");
-        window[funct]();
-    }
 })
 /////recomendations by me
 $("#project-wrapper").slideUp();
@@ -97,13 +108,7 @@ function trMusic(data) {
     var token = localStorage.getItem("token");
     document.onreadystatechange = function () {
         var state = document.readyState
-        if (state = 'interactive') {
-            document.getElementById('trendingTracks').style.visibility = "hidden";
-        } else if (state == 'complete') {
-            document.getElementById('interactive');
-            document.getElementById('loader').style.visibility = "hidden";
-            document.getElementById('trendingTracks').style.visibility = "visible";
-        }
+
     }
     var dataout = "<h2>Trending music</h2><br>";
     for (var i = 0; i < data.length; i++) {
@@ -482,7 +487,7 @@ function displayArtists() {
         var token = localStorage.getItem("token");
 
         var tag = document.getElementById("art");
-        
+
 
         // whole.style.display = "flex";
         content.setAttribute("class", "col-md-3 col-lg-3 col-sm-12")
@@ -538,6 +543,7 @@ function displayArtists() {
                 modBody.innerHTML = modData;
 
                 document.getElementById("buyIt").addEventListener("click", function () {
+                    console.log(token)
                     if (token !== null) {
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function () {
@@ -550,7 +556,7 @@ function displayArtists() {
                         xhttp.send();
                         plyArt += "</h4>";
                         plyMus += "</h5>";
-                        plyUser += "</h5>"
+
 
                         artName.innerHTML = plyArt;
                         musName.innerHTML = plyMus;
@@ -699,10 +705,6 @@ function displayMusic() {
     content.setAttribute("class", "col-md-6");
     elementi.setAttribute("class", "col-md-6");
 
-    var node = document.createElement("p");
-    var textnode = document.createTextNode("water");
-    node.appendChild(textnode);
-    content.appendChild(node);
 
 
     var xhttp = new XMLHttpRequest();
@@ -801,9 +803,11 @@ function singIn() {
     xhttp.onreadystatechange = function () {
         var stat = xhttp.status;
         status(stat);
-        if (this.readyState == 4 && this.status == 200) {
-            var data = this.responseText;
+        if (this.readyState == 4 && this.status == 202) {
+            var data = JSON.parse(this.responseText);
+            console.log("W");
             localStorage.setItem('token', data)
+
 
         }
 
@@ -816,7 +820,7 @@ function singIn() {
         if (stat === 409) {
             document.getElementById("msg").innerHTML = mesagge1;
         }
-        if (stat === 200) {
+        if (stat === 202) {
             document.getElementById("msg").innerHTML = mesagge2;
             $("#sing-modal").removeClass('fade').modal('hide')
             $("#sing-in").trigger("reset");
@@ -840,31 +844,41 @@ function setTheme(theme) {
     sessionStorage.theme = theme;
 }
 function singOut() {
-    if(localStorage.getItem("token") !== null){
+    if (localStorage.getItem("token") !== null) {
         localStorage.removeItem("token");
         alert("You have singed out");
     }
-    else{
-        
+    else {
+
     }
 }
 function remain() {
     var clicked = document.activeElement;
     var attr = clicked.getAttribute("rel");
     console.log(clicked)
-    if(attr !== null){
-    funct = "display"+attr+"";
-    localStorage.funct = funct;
-    console.log(funct)
+    if (attr !== null) {
+        funct = "display" + attr + "";
+        localStorage.funct = funct;
+        console.log(funct)
     }
 }
-function displayHome(){
+function displayHome() {
     localStorage.removeItem("funct")
 }
-function showSing(){
+function showSing() {
     console.log("W")
     var singUp = document.getElementById("sing-up");
     $(singUp).slideToggle();
+}
+function remain() {
+    var clicked = document.activeElement;
+    var attr = clicked.getAttribute("rel");
+    console.log(clicked)
+    if (attr !== null) {
+        funct = "display" + attr + "";
+        localStorage.funct = funct;
+        console.log(funct)
+    }
 }
 $(document).ready(function () {
     $("#carousel").carousel({

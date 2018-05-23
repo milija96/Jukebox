@@ -3,7 +3,6 @@
 
 <head>
     <title>JukeBox</title>
-    <style type="text/css">body {visibility: hidden;}</style>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -75,7 +74,7 @@
             </div>
         </nav>
     </header>
-    <div id="whole" class="container row col-md-12 col-lg-12 col-xs-12">
+    <div id="whole" class="container row col-md-12 col-lg-12 col-xs-12" style="visibility: hidden; ">
         <div class="container col-xs-12" id="content">
             <div id="firstSec" class="row flex-container col-md-12 col-lg-12" id="play">
                 <div id="carousel" class="carousel slide col-md-4 col-lg-4 col-sm-12" data-ride="carousel">
@@ -110,8 +109,6 @@
                 </div>
             </div>
             <div class="row col-sm-12 col-md-12 col-lg-12" id="tracksInfo">
-                <div class="loader">
-                </div>
                 <div class="col-sm-12 col-lg-4" id="trendingTracks" style="border: 1px solid red">
 
                 </div>
@@ -208,10 +205,10 @@
             </div>
         </div>
     </div>
+    <div class="spinner" id="spiner" style="visibility: hidden;">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
     </div>
-    <div class="loaer">
-    </div>
-
     <footer>
     </footer>
     <script>
@@ -220,6 +217,12 @@
         document.documentElement.className = 'no-fouc';
         var newTheme = sessionStorage.getItem("theme");
         setTheme(newTheme);
+        var wholes = document.getElementById("whole");
+        var funct = localStorage.getItem("funct");
+        if (funct !== null) {
+            window[funct]();
+        }
+        console.log(body);
         $(document).ready(function () {
             $('.no-fouc').removeClass('no-fouc');
         });
