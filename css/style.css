@@ -72,7 +72,7 @@ body{
 }
 #whole{
     position: absolute;
-    z-index: 1;
+    /* z-index: 1; */
 }
 #carousel  img{
     position: relative;
@@ -201,8 +201,11 @@ body{
     margin: 20px 20px;
     text-align: center;
     background:rgba(255,255,255,0.05);
+   
 }
-
+#modal-backdrop{
+   
+}
 #sing-up{
     padding: 20px 20px;
     margin: 20px 20px;
@@ -246,6 +249,39 @@ body{
 .alert{
     display: none;
 }
+.fa-user{
+    font-size: 38px;
+    z-index: 1;
+    position: relative;
+}
+#dropdownUserButton ::after{
+    display: none;
+}
+.navbar-right{
+    margin-right: 100px; 
+}
+
+#dropdownUserButton{
+    margin-right: 10px; 
+}
+#dropDownUserMenu{
+    width: 10px;
+}
+#dropdownStyleMenu{
+    width: 10px;
+}
+.dot {
+    height: 15px;
+    width: 15px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    z-index: 2;
+    position: relative;
+    left: -7px;
+    bottom: -5px;
+    top: -2px;
+  }
 @-webkit-keyframes spin {
     0% { -webkit-transform: rotate(0deg); }
     100% { -webkit-transform: rotate(360deg); }
@@ -299,5 +335,14 @@ body{
     #elementi ul{
         padding-left: 5px;
         padding-top: 5px;
+    }
+    #dropdownUserButton{
+        margin-bottom: 10px; 
+    }
+    @media only screen and (min-width: 768px){
+        #elementi{
+            margin-top: 30px;
+            /* margin-left: 10px; */
+        }
     }
 }

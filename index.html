@@ -51,23 +51,28 @@
                 </ul>
                 <div class="nav navbar-nav navbar-right" id="navBar">
                     <div class="dropdown">
+                        <li id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user"><span class="dot" id="status"></span></i>
+                            
+                        </li>
+                        <div class="dropdown-menu" aria-labelledby="dropdownUserButton" id="dropDownUserMenu">
+                            <a class="dropdown-item" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
+                            <a class="dropdown-item" onclick="singOut()">Sing out</a>
+                        </div>
+                    </div>
+                    <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             Styles
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdownStyleMenu">
                             <a id="style1" class="dropdown-item" href="#" onclick="changeIt()" rel="red">Style 1</a>
                             <a id="style2" class="dropdown-item" href="#" onclick="changeIt()" rel="blue">Style 2</a>
                             <a id="style3" class="dropdown-item" href="#" onclick="changeIt()" rel="lightblue">Style 3</a>
                             <a id="style4" class="dropdown-item" href="#" onclick="changeIt()" rel="yellow">Style 4</a>
                         </div>
                     </div>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" onclick="singOut()">Sing out</a>
-                    </li>
+
                 </div>
             </div>
             </div>
@@ -113,6 +118,7 @@
 
                 </div>
                 <div class="col col-sm-12 col-lg-4" id="trendingArtists">
+                    <button class="btn btn-danger" onclick="clickItY()">Click</button>
                 </div>
                 <div class="col col-sm-12  col-lg-4">
                     <h2>Advertising</h2>
@@ -174,9 +180,9 @@
                             <div class="col form-group" id="sing-in">
                                 <form action="" method="POST" id="sing-in-form">
                                     <h2>Sing in</h2>
-                                    <input type="email" class="form-control" id="singInUser" aria-describedby="userHelp" placeholder="Enter email">
+                                    <input type="email" class="form-control" id="singInUser" aria-describedby="userHelp" placeholder="Enter email" required>
                                     <br>
-                                    <input type="password" class="form-control" id="singInPassw" placeholder="Password">
+                                    <input type="password" class="form-control" id="singInPassw" placeholder="Password" required>
                                     <br>
                                     <div class="d-flex justify-content-between">
                                         <button type="submit" id="singInBtn" class="btn btn-success btn-lg" onclick="singIn()">SING IN</button>
@@ -189,9 +195,11 @@
                             <div class="col form-group" id="sing-up">
                                 <form action="" method="POST" id="sing-up-form">
                                     <h2>Sing up</h2>
-                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
                                     <br>
                                     <input type="password" class="form-control" id="singUpPassw" placeholder="Password">
+                                    <br>
+                                    <input type="password" class="form-control" id="singInPasswRepeat" placeholder="Repeat password">
                                     <br>
                                     <div class="d-flex justify-content-between">
                                         <button type="submit" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>
