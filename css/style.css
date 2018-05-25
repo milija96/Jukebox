@@ -203,9 +203,7 @@ body{
     background:rgba(255,255,255,0.05);
    
 }
-#modal-backdrop{
-   
-}
+
 #sing-up{
     padding: 20px 20px;
     margin: 20px 20px;
@@ -291,6 +289,12 @@ body{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+#activeUser{
+    visibility: hidden;
+    position: relative;
+    top: 7px;
+    left: -7px;
+}
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     #musicData{
@@ -307,12 +311,7 @@ body{
     #firstSec{
         margin-bottom: 400px;  
     }
-    #project-wrapper{
-        left: 10px;
-        width: 200px;
-        height: 200px;
-        margin: 0 auto;
-    }
+
     #musicData{
         margin-top: 10px; 
     }

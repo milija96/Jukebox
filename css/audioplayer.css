@@ -38,16 +38,20 @@
     #project-wrapper {
     position: fixed;
     display: inline-block;
-    margin: auto;
+    margin: 0 auto;
     bottom: 10px;
-    width: 20%;
-    left: 50px;
+    left: 10%;
+    right: 10%;
     display: none;
     background-size: cover;
     background: url('/og_image.png') no-repeat;
     background-size: 100% 200px;
     overflow: hidden;
     border-radius: 25px;
+    min-width: 250px;
+    }
+    #project-container{
+        width: 100%;
     }
     #musName {
         opacity: 0.5;

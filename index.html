@@ -50,6 +50,9 @@
 
                 </ul>
                 <div class="nav navbar-nav navbar-right" id="navBar">
+                        <li class="nav-item">
+                                <p id="activeUser"></p>
+                        </li>
                     <div class="dropdown">
                         <li id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-user"><span class="dot" id="status"></span></i>
@@ -57,6 +60,7 @@
                         </li>
                         <div class="dropdown-menu" aria-labelledby="dropdownUserButton" id="dropDownUserMenu">
                             <a class="dropdown-item" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" onclick="singOut()">Sing out</a>
                         </div>
                     </div>
@@ -145,10 +149,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-lg-3 col-xs-12" id="project-wrapper" style="width: 250px;">
-            <div id="project-container">
+        <div class="col-md-5 col-lg-3 col-xs-12" id="project-wrapper" >
+            <div id="project-container" >
                 <div id="overlay"></div>
-                <div id="content">
+                <div id="contentMus" >
                     <div id="artName"></div>
                     <div id="musName"></div>
                     <input id="range" type="range" value="0" />

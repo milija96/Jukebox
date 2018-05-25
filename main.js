@@ -11,7 +11,6 @@ function remain() {
 function clickItY() {
     var xhttp = new XMLHttpRequest();
     var token = localStorage.getItem("token");
-    console.log(token)
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
         }
@@ -42,9 +41,20 @@ $(document).ready(function () {
     $('.navbar-nav>li>').on('click', function () {
         $('.navbar-collapse').collapse('hide');
     });
+    $("#carousel").carousel({
+        interval: 2000
+    });
     var status = localStorage.getItem("status");
     if(status !== null){
     document.getElementById("status").style.backgroundColor = status;
+    }
+    var user = localStorage.getItem("user")
+    if(user !==null){
+        document.getElementById("activeUser").style.visibility = "visible";
+        document.getElementById("activeUser").innerHTML =  user;
+    }
+    else{
+        document.getElementById("activeUser").style.visibility = "hidden";
     }
 })
 /////recomendations by me
@@ -82,9 +92,11 @@ function myReco(dataR) {
         $("#project-wrapper").slideUp();
         var plyArt = "<h4>";
         var plyMus = "<h5>";
+        var id = recom[dataReClick].id;
         plyArt += recom[dataReClick].izvodjacIme;
         plyMus += recom[dataReClick].naziv;
         modData = "";
+        id = recom[dataReClick].id;
         modData += recom[dataReClick].izvodjacIme + ": " + recom[dataReClick].naziv + "<br>Cena: " + recom[dataReClick].cenaKolicina + "din";
         modBody.innerHTML = modData;
         document.getElementById("buyIt").addEventListener("click", function () {
@@ -94,8 +106,10 @@ function myReco(dataR) {
                     var data = JSON.parse(this.responseText);
                 }
             };
-            xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + recom[dataReClick].id, true);
-            xhttp.send();
+            xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+            xhttp.setRequestHeader("Authorization", token);
+            xhttp.setRequestHeader("Content-Type", "application/json");
+            xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
             plyArt += "</h4>";
             plyMus += "</h5>";
 
@@ -249,6 +263,7 @@ function openPunk() {
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
+            id = data[pased].id;
             modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
             modBody.innerHTML = modData;
             document.getElementById("buyIt").addEventListener("click", function () {
@@ -259,8 +274,10 @@ function openPunk() {
                             var data = JSON.parse(this.responseText);
                         }
                     };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
-                    xhttp.send();
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                    xhttp.setRequestHeader("Authorization", token);
+                    xhttp.setRequestHeader("Content-Type", "application/json");
+                    xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
                     plyArt += "</h4>";
                     plyMus += "</h5>";
 
@@ -313,6 +330,7 @@ function openRock() {
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
+            id = data[pased].id;
             modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
             modBody.innerHTML = modData;
             document.getElementById("buyIt").addEventListener("click", function () {
@@ -323,8 +341,10 @@ function openRock() {
                             var data = JSON.parse(this.responseText);
                         }
                     };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
-                    xhttp.send();
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                    xhttp.setRequestHeader("Authorization", token);
+                    xhttp.setRequestHeader("Content-Type", "application/json");
+                    xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
                     plyArt += "</h4>";
                     plyMus += "</h5>";
 
@@ -377,6 +397,7 @@ function openNarodna() {
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
+            id = data[pased].id;
             modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
             modBody.innerHTML = modData;
             document.getElementById("buyIt").addEventListener("click", function () {
@@ -387,8 +408,10 @@ function openNarodna() {
                             var data = JSON.parse(this.responseText);
                         }
                     };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
-                    xhttp.send();
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                    xhttp.setRequestHeader("Authorization", token);
+                    xhttp.setRequestHeader("Content-Type", "application/json");
+                    xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
                     plyArt += "</h4>";
                     plyMus += "</h5>";
 
@@ -440,6 +463,7 @@ function openHouse() {
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
+            id = data[pased].id;
             modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
             modBody.innerHTML = modData;
             document.getElementById("buyIt").addEventListener("click", function () {
@@ -450,8 +474,10 @@ function openHouse() {
                             var data = JSON.parse(this.responseText);
                         }
                     };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
-                    xhttp.send();
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                    xhttp.setRequestHeader("Authorization", token);
+                    xhttp.setRequestHeader("Content-Type", "application/json");
+                    xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
                     plyArt += "</h4>";
                     plyMus += "</h5>";
 
@@ -560,16 +586,17 @@ function displayArtists() {
 
                 document.getElementById("buyIt").addEventListener("click", function () {
                     if (token !== null) {
-                        console.log(token)
+                        id = dataArt[data].id;
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function () {
                             if (this.readyState == 4 && this.status == 200) {
                                 var data = JSON.parse(this.responseText);
                             }
                         };
-                        xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + dataArt[data].id, true);
+                        xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
                         xhttp.setRequestHeader("Authorization", token);
-                        xhttp.send();
+                        xhttp.setRequestHeader("Content-Type", "application/json");
+                        xhttp.send(JSON.stringify({pesmaId: id, idKor: 0}));
                         plyArt += "</h4>";
                         plyMus += "</h5>";
 
@@ -670,6 +697,7 @@ function displayGanre() {
                 plyArt += genreData[data].izvodjacIme;
                 plyMus += genreData[data].naziv;
                 modData = "";
+                id = dataArt[data].id;
                 console.log(data)
                 modData += genreData[data].izvodjacIme + ": " + genreData[data].naziv + "<br>Cena: " + genreData[data].cenaKolicina + "din";
                 modBody.innerHTML = modData;
@@ -681,8 +709,10 @@ function displayGanre() {
                             var data = JSON.parse(this.responseText);
                         }
                     };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + genreData[data].id, true);
-                    xhttp.send(token);
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                    xhttp.setRequestHeader("Authorization", token);
+                    xhttp.setRequestHeader("Content-Type", "application/json");
+                    xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
 
                     plyArt += "</h4>";
                     plyMus += "</h5>";
@@ -746,13 +776,6 @@ function displayMusic() {
         for (var i = 0; i < data.length; i++) {
             output += '<p id="buyMus" data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')">' + data[i].izvodjacIme + '<br><span id="music">' + data[i].naziv + '</span><i id="cart" class="fa fa-shopping-cart"></i></p>';
         }
-        // var list = "<ul class='pagination'>";
-        // var listI = "";
-        // var num ="dzoooooo";
-        // for(let i = 0;i<5;i++){
-        //     listI += "<li class='page-item'><a class='page-link'>"+num+"</a></li>"
-        // }
-        // list +="</ul>"
         console.log(data)
         function myData(pased) {
             $("#project-wrapper").slideUp();
@@ -761,6 +784,7 @@ function displayMusic() {
             plyArt += data[pased].izvodjacIme;
             plyMus += data[pased].naziv;
             modData = "";
+            id = data[pased].id;
             modData += data[pased].izvodjacIme + ": " + data[pased].naziv + "<br>Cena: " + data[pased].cenaKolicina + "din";
             modBody.innerHTML = modData;
             document.getElementById("buyIt").addEventListener("click", function () {
@@ -770,8 +794,10 @@ function displayMusic() {
                         var data = JSON.parse(this.responseText);
                     }
                 };
-                xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi/" + data[pased].id, true);
-                xhttp.send();
+                xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                xhttp.setRequestHeader("Authorization", token);
+                xhttp.setRequestHeader("Content-Type", "application/json");
+                xhttp.send(JSON.stringify({pesmaId: id, idKor: 27}));
                 plyArt += "</h4>";
                 plyMus += "</h5>";
 
@@ -830,21 +856,28 @@ function singIn() {
         emailValue = elements[0].value;
         passwordValue = elements[1].value;
     }
+    localStorage.user = emailValue;
     var xhttp = new XMLHttpRequest();
     var status = xhttp.status;
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             var stat = xhttp.status;
-            statusOf(stat)
             var data = this.responseText;
             localStorage.setItem('token', data)
+            var stat = this.status;
+            statusOf(stat)
+            document.getElementById("activeUser").innerHTML = localStorage.getItem("user");
         }
-
+        else if(this.readyState == 4 && this.status >= 300){
+            var stat = this.status;
+            statusOf(stat)
+        }
     };
-    localStorage.status = "green";
     function statusOf(stat) {
+        console.log(stat)
         if (stat === 409) {
             document.getElementById("msg").innerHTML = mesagge1;
+            
         }
         if (stat === 200) {
             document.getElementById("msg").innerHTML = mesagge2;
@@ -860,7 +893,6 @@ function singIn() {
     xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/korisnici/login", true, );
     xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
     xhttp.send(JSON.stringify({ email: emailValue, sifra: passwordValue }));
-
 }
 ///////////the next function is used to change the style of the page, and save propertyes in session storage
 function changeIt() {
@@ -883,6 +915,9 @@ function singOut() {
     if(localStorage.getItem("status") !== null) {
         localStorage.removeItem("status");
         document.getElementById("status").style.backgroundColor = "transparent";
+    }
+    if(localStorage.getItem("user") !== null){
+        localStorage.removeItem("user");
     }
 
 }
@@ -914,8 +949,4 @@ function remain() {
         console.log(funct)
     }
 }
-$(document).ready(function () {
-    $("#carousel").carousel({
-        interval: 2000
-    });
-});
+
