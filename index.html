@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/audioplayer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
+
+
     <link rel="shortcut icon" href="">
     <script src="js/audioplayer.js"></script>
     <script src="main.js"></script>
@@ -59,7 +61,7 @@
                             
                         </li>
                         <div class="dropdown-menu" aria-labelledby="dropdownUserButton" id="dropDownUserMenu">
-                            <a class="dropdown-item" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
+                            <a id="singInLink"class="dropdown-item" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" onclick="singOut()">Sing out</a>
                         </div>
@@ -84,8 +86,8 @@
         </nav>
     </header>
     <div id="whole" class="container row col-md-12 col-lg-12 col-xs-12" style="visibility: hidden; ">
-        <div class="container col-xs-12" id="content">
-            <div id="firstSec" class="row flex-container col-md-12 col-lg-12" id="play">
+        <div class="container col-xs-12" id="content" style="visibility: hidden; " >
+            <div id="firstSec" class="row  col-md-12 col-lg-12 col-xs-12" id="play" >
                 <div id="carousel" class="carousel slide col-md-4 col-lg-4 col-sm-12" data-ride="carousel">
                     <div class="container carousel-inner col-md-12 col-lg-12 col-sm-12" id="carouselLinear">
                         <div class="carousel-item active" style="width: 320px; height: 200px;">
@@ -114,22 +116,22 @@
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
                         standard dummy text ever since the 1500s.</p>
                 </div>
-                <div id="reco" class="col col-sm-12 col-md-4 col-lg-4 col-sm-12">
+                <div id="reco" class="col col-md-4 col-lg-4 col-sm-12 col-xs-12" style="border: 1px solid red">
+
                 </div>
             </div>
             <div class="row col-sm-12 col-md-12 col-lg-12" id="tracksInfo">
-                <div class="col-sm-12 col-lg-4" id="trendingTracks" style="border: 1px solid red">
+                <div class="col-sm-12 col-lg-4" id="trendingTracks" >
 
                 </div>
                 <div class="col col-sm-12 col-lg-4" id="trendingArtists">
-                    <button class="btn btn-danger" onclick="clickItY()">Click</button>
                 </div>
                 <div class="col col-sm-12  col-lg-4">
                     <h2>Advertising</h2>
                 </div>
             </div>
         </div>
-        <div id="elementi" class=""></div>
+        <div id="elementi" class="" style="visibility: hidden; "></div>
         <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -144,7 +146,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" id="buyIt">Buy</button>
+                        <button type="button" class="btn btn-primary" id="buyIt" data-toggle="popover" data-content="You need to sing in">Buy</button>
                     </div>
                 </div>
             </div>
@@ -189,7 +191,7 @@
                                     <input type="password" class="form-control" id="singInPassw" placeholder="Password" required>
                                     <br>
                                     <div class="d-flex justify-content-between">
-                                        <button type="submit" id="singInBtn" class="btn btn-success btn-lg" onclick="singIn()">SING IN</button>
+                                        <button type="button" id="singInBtn" class="btn btn-success btn-lg" onclick="singIn()">SING IN</button>
                                         <button type="reset" id="resetInBtn" class="btn btn-danger btn-lg">RESET</button>
                                     </div>
                                 </form>
@@ -199,11 +201,12 @@
                             <div class="col form-group" id="sing-up">
                                 <form action="" method="POST" id="sing-up-form">
                                     <h2>Sing up</h2>
-                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" required>
+                                    
+                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" required> <!--<i id="excel" class="fa fa-exclamation-circle" aria-hidden="false"></i>-->
                                     <br>
-                                    <input type="password" class="form-control" id="singUpPassw" placeholder="Password">
+                                    <input type="password" class="form-control" id="singUpPassw" placeholder="Password"><i id="excel" class="fa fa-exclamation-circle" aria-hidden="false"></i>
                                     <br>
-                                    <input type="password" class="form-control" id="singInPasswRepeat" placeholder="Repeat password">
+                                    <input type="password" class="form-control" id="singInPasswRepeat" placeholder="Repeat password"><i id="excel" class="fa fa-exclamation-circle" aria-hidden="false"></i>
                                     <br>
                                     <div class="d-flex justify-content-between">
                                         <button type="submit" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>

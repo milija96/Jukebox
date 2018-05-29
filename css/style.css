@@ -244,6 +244,13 @@ body{
 #msg{
     padding-top: 5px; 
 }
+#excel{
+    font-size: 26px;
+    position: relative;
+    top: -32px;
+    right: -170px;
+    color: red;
+}
 .alert{
     display: none;
 }
@@ -294,6 +301,13 @@ body{
     position: relative;
     top: 7px;
     left: -7px;
+}
+.page-item{
+    color: black;
+}
+.page-link{
+    background-color: red;
+    border-color: black;
 }
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
