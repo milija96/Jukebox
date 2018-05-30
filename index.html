@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" crossorigin="anonymous">
     <link rel="stylesheet" href="css/audioplayer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
 
 
     <link rel="shortcut icon" href="">
@@ -184,14 +185,14 @@
                     <div class="container col-md-12">
                         <div class="row">
                             <div class="col form-group" id="sing-in">
-                                <form action="" method="POST" id="sing-in-form">
+                                <form action="" method="POST" id="sing-in-form" onsubmit="singIn()">
                                     <h2>Sing in</h2>
                                     <input type="email" class="form-control" id="singInUser" aria-describedby="userHelp" placeholder="Enter email" required>
                                     <br>
                                     <input type="password" class="form-control" id="singInPassw" placeholder="Password" required>
                                     <br>
                                     <div class="d-flex justify-content-between">
-                                        <button type="button" id="singInBtn" class="btn btn-success btn-lg" onclick="singIn()">SING IN</button>
+                                        <button type="submit" id="singInBtn" class="btn btn-success btn-lg">SING IN</button>
                                         <button type="reset" id="resetInBtn" class="btn btn-danger btn-lg">RESET</button>
                                     </div>
                                 </form>
@@ -199,19 +200,19 @@
                                 <button class="btn btn-success" id="new" onclick="showSing()">Sing up</button>
                             </div>
                             <div class="col form-group" id="sing-up">
-                                <form action="" method="POST" id="sing-up-form">
+                                <form method="POST" id="sing-up-form" >
                                     <h2>Sing up</h2>
-                                    
-                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" required> <!--<i id="excel" class="fa fa-exclamation-circle" aria-hidden="false"></i>-->
+                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" data-placement="top" required data-toggle="popoverEmail" data-content="You need to fill this field" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
                                     <br>
-                                    <input type="password" class="form-control" id="singUpPassw" placeholder="Password"><i id="excel" class="fa fa-exclamation-circle" aria-hidden="false"></i>
-                                    <br>
-                                    <input type="password" class="form-control" id="singInPasswRepeat" placeholder="Repeat password"><i id="excel" class="fa fa-exclamation-circle" aria-hidden="false"></i>
+                                    <input type="password" class="form-control " id="singUpPassw" placeholder="Password" data-toggle="popoverPassword" data-placement="bottom" data-content="You need to fill this field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
                                     <br>
                                     <div class="d-flex justify-content-between">
-                                        <button type="submit" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>
+                                        <button type="button" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>
                                         <button type="reset" id="resetUpBtn" class="btn btn-danger btn-lg">RESET</button>
                                     </div>
+                                    <meter max="4" id="password-strenght-meter"></meter>
+                                    <p id="password-strenght-text"></p>
+                                    <p id="singMsg"></p>
                                 </form>
                             </div>
                         </div>

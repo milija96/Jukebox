@@ -716,7 +716,6 @@ function displayGanre() {
                 genreData.push(data[7])
                 genreData.push(data[8])
             }
-            // document.getElementById("elementi").innerHTML = dataArt;
             for (var i = 0; i < genreData.length; i++) {
                 gData += '<li>' + genreData[i].izvodjacIme + ' <br><span id="music">' + genreData[i].naziv + '</span></li><br><a id="playItbtn" style="float: right" href="#" class="btn btn-success" data-toggle="modal" data-target="#basicModal" onclick="geData(' + i + ')"> Play it</a><br><br>';
             }
@@ -727,7 +726,7 @@ function displayGanre() {
                 plyArt += genreData[data].izvodjacIme;
                 plyMus += genreData[data].naziv;
                 modData = "";
-                id = dataArt[data].id;
+                id = genreData[data].id;
                 console.log(data)
                 modData += genreData[data].izvodjacIme + ": " + genreData[data].naziv + "<br>Cena: " + genreData[data].cenaKolicina + "din";
                 modBody.innerHTML = modData;
@@ -925,48 +924,66 @@ function displayMusic() {
 }
 ///////////sing up form function
 function singUp() {
-    event.preventDefault();
+
     var id = "";
     var emailValue = "";
     var passwordValue = ""
     var elements = document.getElementById("sing-up-form").elements;
+
     for (var i = 0; i < elements.length; i++) {
         emailValue = elements[0].value;
         passwordValue = elements[1].value;
-        repeatPasswordValue = elements[2].value;
     }
-
-    if (repeatPasswordValue === passwordValue) {
-        if (emailValue !== null) {
-            if (passwordValue !== null) {
-                if (repeatPasswordValue !== null) {
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.onreadystatechange = function () {
-                        if (this.readyState == 4 && this.status == 200) {
-                            var data = JSON.parse(this.responseText);
-                        }
-                    };
-                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/korisnici", true, );
-                    xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
-                    xhttp.send(JSON.stringify({ email: emailValue, sifra: passwordValue }));
-                }else{
-
+    if (emailValue.length !== 0) {
+        validateEmail(emailValue)
+        if (passwordValue.length !== 0) {
+            validatePassword(passwordValue)
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var data = JSON.parse(this.responseText);
+                    var sta = this.status;
+                    statusOfSing(sta)
                 }
-            }else{
-
+                if (this.readyState == 4 && this.status >= 300) {
+                    var sta = this.status;
+                    statusOfSing(sta)
+                }
+            };
+            function statusOfSing(sta) {
+                var msg = "";
+                if (sta === 409) {
+                    msg += "Someone with the same email already exists"
+                }
+                if(sta === 200){
+                    msg += "Succes"
+                }
+                else {
+                    msg += "Something went wrong"
+                }
+                document.getElementById("singMsg").innerHTML = msg;
             }
-        }else{
-
+            $('[data-toggle="popoverEmail"]').popover('hide');
+            $('[data-toggle="popoverPassword"]').popover("hide");
+            xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/korisnici", true, );
+            xhttp.setRequestHeader("Content-Type", "application/json; charset=utf-8");
+            xhttp.send(JSON.stringify({ email: emailValue, sifra: passwordValue }));
+        } else {
+            $('[data-toggle="popoverPassword"]').popover("show");
         }
-    }
+    } 
     else {
-        
+        $('[data-toggle="popoverEmail"]').popover('show');
     }
+    function validateEmail(emailValue){
+        var n = emailValue.includes(".com")
+    }
+    function validatePassword(){
 
+    }
 }
 /////////////sing in form function
 function singIn() {
-    console.log("sing")
     var id = "";
     var emailValue = "";
     var passwordValue = "";
@@ -1071,6 +1088,35 @@ function displayHome() {
 function showSing() {
     var singUp = document.getElementById("sing-up");
     $(singUp).slideToggle();
+
+    var strength = {
+        0: "Worst",
+        1: "Bad",
+        2: "Weak",
+        3: "Good",
+        4: "Strong"
+    }
+
+    var password = document.getElementById("singUpPassw")
+
+    var meter = document.getElementById('password-strenght-meter');
+    var text = document.getElementById('password-strenght-text');
+    
+    password.addEventListener('input', function () {
+        var val = password.value;
+        var result = zxcvbn(val);
+    
+        // Update the password strength meter
+        meter.value = result.score;
+    
+        // Update the text indicator
+        if (val !== "") {
+            text.innerHTML = "Strength: " + strength[result.score];
+        } else {
+            text.innerHTML = "";
+        }
+    });
+
 }
 function remain() {
     var clicked = document.activeElement;
@@ -1082,4 +1128,5 @@ function remain() {
         console.log(funct)
     }
 }
+
 
