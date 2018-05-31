@@ -52,97 +52,101 @@ $(document).ready(function () {
     else {
         document.getElementById("activeUser").style.visibility = "hidden";
     }
+    $("#project-wrapper").slideUp();
+    var token = localStorage.getItem("token");
+    var xhttp1 = new XMLHttpRequest();
+    xhttp1.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            var dataR = JSON.parse(this.responseText);
+            myReco(dataR);
+            var statu = this.status;
+            statusOfReco(statu)
+        }
+        else if (this.readyState == 4 && this.status >= 300) {
+            var statu = this.status;
+            statusOfReco(statu)
+        }
+    };
+    function statusOfReco(statu) {
+        console.log(statu)
+        if (statu === 401) {
+            alert("Your session has expired. Please log in again");
+        }
+        if (statu === 500) {
+            console.log("A")
+            msg = "<p id='msge'>You need to sing in to view this</p>";
+            document.getElementById("reco").innerHTML = msg;
+
+        }
+    }
+    window.statusOfReco = statusOfReco;
+
+
+    xhttp1.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme/recomended", true);
+    xhttp1.setRequestHeader("Authorization", token);
+    xhttp1.setRequestHeader("Content-Type", "application/json");
+    
+    xhttp1.send();
+
+    function myReco(dataR) {
+        var modHead = document.getElementById("myModalLabel");
+        var modBody = document.getElementById("modBody");
+        var artName = document.getElementById("artName");
+        var musName = document.getElementById("musName");
+
+        var reco = document.getElementById("reco");
+        var recoList = "";
+
+        for (var i = 0; i < dataR.length; i++) {
+            recoList += "<p data-toggle='modal' data-target='#basicModal' onclick='myRecoData(" + i + ")'>" + dataR[i].naziv + '</span><i style="float: right" class="fa fa-play fa spin"></i></p><hr>';
+        }
+        function myRecoData(dataReClick) {
+            $("#project-wrapper").slideUp();
+            var plyArt = "<h4>";
+            var plyMus = "<h5>";
+            plyArt += dataR[dataReClick].izvodjacIme;
+            plyMus += dataR[dataReClick].naziv;
+            modData = "";
+            id = dataR[dataReClick].id;
+            modData += dataR[dataReClick].izvodjacIme + ": " + dataR[dataReClick].naziv + "<br>Cena: " + dataR[dataReClick].cenaKolicina + "din";
+            modBody.innerHTML = modData;
+            var buy = document.getElementById("buyIt");
+            buy.addEventListener("click", function () {
+                if (token !== null) {
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var data = this.responseText;
+                        }
+
+                    };
+                    xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
+                    xhttp.setRequestHeader("Authorization", token);
+                    xhttp.setRequestHeader("Content-Type", "application/json");
+                    xhttp.send(JSON.stringify({ pesmaId: id, idKor: 0 }));
+                    plyArt += "</h4>";
+                    plyMus += "</h5>";
+
+                    artName.innerHTML = plyArt;
+                    musName.innerHTML = plyMus;
+
+                    $("#basicModal").removeClass('fade').modal('hide')
+                    $("#project-wrapper").slideDown();
+                } else {
+                    $('[data-toggle="popover"]').popover("show");;
+                }
+
+            })
+
+        }
+        reco.innerHTML = recoList;
+        window.myRecoData = myRecoData;
+    }
+
+
 })
-/////recomendation
-$("#project-wrapper").slideUp();
-var token = localStorage.getItem("token");
-var xhttp1 = new XMLHttpRequest();
-xhttp1.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-        var dataR = JSON.parse(this.responseText);
-        myReco(dataR);
-        var statu = this.status;
-        statusOfReco(statu)
-    }
-    else if (this.readyState == 4 && this.status >= 300) {
-        var statu = this.status;
-        statusOfReco(statu)
-    }
-};
-function statusOfReco(statu) {
-    console.log(statu)
-    if (statu === 401) {
-        alert("Your session has expired. Please log in again");
-    }
-    if (statu === 500) {
-        console.log("A")
-        msg = "<p id='msge'>You need to sing in to view this</p>";
-        document.getElementById("reco").innerHTML = msg;
-
-    }
-}
-window.statusOfReco = statusOfReco;
 
 
-xhttp1.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/pesme/recomended", true);
-xhttp1.setRequestHeader("Content-Type", "application/json");
-xhttp1.setRequestHeader("Authorization", token);
-xhttp1.send();
-
-function myReco(dataR) {
-    var modHead = document.getElementById("myModalLabel");
-    var modBody = document.getElementById("modBody");
-    var artName = document.getElementById("artName");
-    var musName = document.getElementById("musName");
-
-    var reco = document.getElementById("reco");
-    var recoList = "";
-
-    for (var i = 0; i < dataR.length; i++) {
-        recoList += "<p data-toggle='modal' data-target='#basicModal' onclick='myRecoData(" + i + ")'>" + dataR[i].naziv + '</span><i style="float: right" class="fa fa-play fa spin"></i></p><hr>';
-    }
-    function myRecoData(dataReClick) {
-        $("#project-wrapper").slideUp();
-        var plyArt = "<h4>";
-        var plyMus = "<h5>";
-        plyArt += dataR[dataReClick].izvodjacIme;
-        plyMus += dataR[dataReClick].naziv;
-        modData = "";
-        id = dataR[dataReClick].id;
-        modData += dataR[dataReClick].izvodjacIme + ": " + dataR[dataReClick].naziv + "<br>Cena: " + dataR[dataReClick].cenaKolicina + "din";
-        modBody.innerHTML = modData;
-        var buy = document.getElementById("buyIt");
-        buy.addEventListener("click", function () {
-            if (token !== null) {
-                var xhttp = new XMLHttpRequest();
-                xhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        var data = this.responseText;
-                    }
-
-                };
-                xhttp.open("POST", "http://192.168.0.58:8080/JukeboxWebService/webapi/prometi", true);
-                xhttp.setRequestHeader("Authorization", token);
-                xhttp.setRequestHeader("Content-Type", "application/json");
-                xhttp.send(JSON.stringify({ pesmaId: id, idKor: 0 }));
-                plyArt += "</h4>";
-                plyMus += "</h5>";
-
-                artName.innerHTML = plyArt;
-                musName.innerHTML = plyMus;
-
-                $("#basicModal").removeClass('fade').modal('hide')
-                $("#project-wrapper").slideDown();
-            } else {
-                $('[data-toggle="popover"]').popover("show");;
-            }
-
-        })
-
-    }
-    reco.innerHTML = recoList;
-    window.myRecoData = myRecoData;
-}
 //////////////trending songs
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function () {
@@ -822,9 +826,11 @@ function displayMusic() {
         var prev = "Prev"
         pageCont = "<ul id='pagination' class='pagination'><li  class='page-item'><a id='prev' class='page-link' onclick='prevPage()'>" + prev + "</a></li>"
         for (var i = 1; i <= pageNum; i++) {
-            pageCont += "<li class='page-item' ><a class='page-link' onclick='pageData(" + i + ")'> " + i + "</a></li>";
+            pageCont += "<li id='items' class='page-item' ><a class='page-link' onclick='pageData(" + i + ")'> " + i + "</a></li>";
         }
         pageCont += "<li class='page-item'><a id='next' class='page-link' onclick='nextPage()'>" + next + "</a><li></ul>"
+
+
 
         function prevPage() {
             var prevNum;
@@ -935,9 +941,7 @@ function singUp() {
         passwordValue = elements[1].value;
     }
     if (emailValue.length !== 0) {
-        validateEmail(emailValue)
         if (passwordValue.length !== 0) {
-            validatePassword(passwordValue)
             var xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
@@ -951,17 +955,16 @@ function singUp() {
                 }
             };
             function statusOfSing(sta) {
-                var msg = "";
+                var meseag = "";
                 if (sta === 409) {
-                    msg += "Someone with the same email already exists"
+                    meseag += "Someone with the same email already exists"
                 }
-                if(sta === 200){
-                    msg += "Succes"
+                if (sta === 200) {
+                    meseag += "Succes, you can sing in now"
+                    $(singUp).slideToggle();
+
                 }
-                else {
-                    msg += "Something went wrong"
-                }
-                document.getElementById("singMsg").innerHTML = msg;
+                document.getElementById("singMsg").innerHTML = meseag;
             }
             $('[data-toggle="popoverEmail"]').popover('hide');
             $('[data-toggle="popoverPassword"]').popover("hide");
@@ -971,16 +974,13 @@ function singUp() {
         } else {
             $('[data-toggle="popoverPassword"]').popover("show");
         }
-    } 
+    }
     else {
         $('[data-toggle="popoverEmail"]').popover('show');
     }
-    function validateEmail(emailValue){
-        var n = emailValue.includes(".com")
-    }
-    function validatePassword(){
-
-    }
+}
+function dontRun() {
+    return false;
 }
 /////////////sing in form function
 function singIn() {
@@ -1023,8 +1023,8 @@ function singIn() {
         }
         if (stat === 200) {
             document.getElementById("msg").innerHTML = mesagge2;
-            localStorage.status = "green";
-            document.getElementById("status").style.backgroundColor = "green";
+            localStorage.status = "#008000";
+            document.getElementById("status").style.backgroundColor = "#008000";
             $("#sing-modal").removeClass("fade").modal("hide")
             $("#sing-in").trigger("reset");
         }
@@ -1101,14 +1101,14 @@ function showSing() {
 
     var meter = document.getElementById('password-strenght-meter');
     var text = document.getElementById('password-strenght-text');
-    
+
     password.addEventListener('input', function () {
         var val = password.value;
         var result = zxcvbn(val);
-    
+
         // Update the password strength meter
         meter.value = result.score;
-    
+
         // Update the text indicator
         if (val !== "") {
             text.innerHTML = "Strength: " + strength[result.score];

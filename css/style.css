@@ -194,11 +194,11 @@ body{
     margin-right: 10px; 
 }
 .modal-lg{
-    max-width: 40% ;
+    max-width: 20% ;
 }
 #sing-in{
     padding-top: 20px;
-    margin: 20px 20px;
+    margin: 20px 0px;
     text-align: center;
     background:rgba(255,255,255,0.05);
    
@@ -206,7 +206,7 @@ body{
 
 #sing-up{
     padding: 20px 20px;
-    margin: 20px 20px;
+    margin: 20px 0px;
     text-align: center;
     background:rgba(255,255,255,0.05);
 }
@@ -287,7 +287,7 @@ body{
     display: inline-block;
     z-index: 2;
     position: relative;
-    left: -7px;
+    left: -15px;
     bottom: -5px;
     top: -2px;
 }

@@ -8,17 +8,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
     <link rel="stylesheet" href="css/audioplayer.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.2/pagination.js"></script>
     <link rel="shortcut icon" href="">
     <script src="js/audioplayer.js"></script>
     <script src="main.js"></script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="">
     <style>
         .no-fuoc {
             display: none
@@ -53,16 +52,18 @@
 
                 </ul>
                 <div class="nav navbar-nav navbar-right" id="navBar">
-                        <li class="nav-item">
-                                <p id="activeUser"></p>
-                        </li>
+                    <li class="nav-item">
+                        <p id="activeUser"></p>
+                    </li>
                     <div class="dropdown">
                         <li id="dropdownUserButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-user"><span class="dot" id="status"></span></i>
-                            
+                            <i class="fa fa-user">
+                                <span class="dot" id="status"></span>
+                            </i>
+
                         </li>
                         <div class="dropdown-menu" aria-labelledby="dropdownUserButton" id="dropDownUserMenu">
-                            <a id="singInLink"class="dropdown-item" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
+                            <a id="singInLink" class="dropdown-item" href="#" data-toggle='modal' data-target='#sing-modal'>Sing in</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" onclick="singOut()">Sing out</a>
                         </div>
@@ -87,8 +88,8 @@
         </nav>
     </header>
     <div id="whole" class="container row col-md-12 col-lg-12 col-xs-12" style="visibility: hidden; ">
-        <div class="container col-xs-12" id="content" style="visibility: hidden; " >
-            <div id="firstSec" class="row  col-md-12 col-lg-12 col-xs-12" id="play" >
+        <div class="container col-xs-12" id="content" style="visibility: hidden; ">
+            <div id="firstSec" class="row  col-md-12 col-lg-12 col-xs-12" id="play">
                 <div id="carousel" class="carousel slide col-md-4 col-lg-4 col-sm-12" data-ride="carousel">
                     <div class="container carousel-inner col-md-12 col-lg-12 col-sm-12" id="carouselLinear">
                         <div class="carousel-item active" style="width: 320px; height: 200px;">
@@ -117,12 +118,12 @@
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
                         standard dummy text ever since the 1500s.</p>
                 </div>
-                <div id="reco" class="col col-md-4 col-lg-4 col-sm-12 col-xs-12" style="border: 1px solid red">
+                <div id="reco" class="col col-md-4 col-lg-4 col-sm-12 col-xs-12" >
 
                 </div>
             </div>
             <div class="row col-sm-12 col-md-12 col-lg-12" id="tracksInfo">
-                <div class="col-sm-12 col-lg-4" id="trendingTracks" >
+                <div class="col-sm-12 col-lg-4" id="trendingTracks">
 
                 </div>
                 <div class="col col-sm-12 col-lg-4" id="trendingArtists">
@@ -152,10 +153,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5 col-lg-3 col-xs-12" id="project-wrapper" >
-            <div id="project-container" >
+        <div class="col-md-5 col-lg-3 col-xs-12" id="project-wrapper">
+            <div id="project-container">
                 <div id="overlay"></div>
-                <div id="contentMus" >
+                <div id="contentMus">
                     <div id="artName"></div>
                     <div id="musName"></div>
                     <input id="range" type="range" value="0" />
@@ -182,17 +183,17 @@
         <div class="modal fade" id="sing-modal" tabindex="-1" role="dialog" aria-labelledby="sing-modal" aria-hidden="true">
             <div class="modal-dialog modal-lg" id="sing-in-content">
                 <div class="modal-content" id="singInModal">
-                    <div class="container col-md-12">
-                        <div class="row">
+                    <div class="container col-md-12 col-xs-12 col-lg-12">
+                        <div class="col">
                             <div class="col form-group" id="sing-in">
-                                <form action="" method="POST" id="sing-in-form" onsubmit="singIn()">
+                                <form action="" method="POST" id="sing-in-form" onsubmit="return dontRun()">
                                     <h2>Sing in</h2>
                                     <input type="email" class="form-control" id="singInUser" aria-describedby="userHelp" placeholder="Enter email" required>
                                     <br>
                                     <input type="password" class="form-control" id="singInPassw" placeholder="Password" required>
                                     <br>
                                     <div class="d-flex justify-content-between">
-                                        <button type="submit" id="singInBtn" class="btn btn-success btn-lg">SING IN</button>
+                                        <button type="submit" id="singInBtn" class="btn btn-success btn-lg" onclick="singIn()">SING IN</button>
                                         <button type="reset" id="resetInBtn" class="btn btn-danger btn-lg">RESET</button>
                                     </div>
                                 </form>
@@ -200,14 +201,16 @@
                                 <button class="btn btn-success" id="new" onclick="showSing()">Sing up</button>
                             </div>
                             <div class="col form-group" id="sing-up">
-                                <form method="POST" id="sing-up-form" >
+                                <form method="POST" id="sing-up-form" onsubmit="return dontRun()">
                                     <h2>Sing up</h2>
-                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" data-placement="top" required data-toggle="popoverEmail" data-content="You need to fill this field" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+                                    <input type="email" class="form-control" id="singUpEmail" aria-describedby="emailHelp" placeholder="Enter email" data-placement="top"
+                                        required data-toggle="popoverEmail" data-content="You need to fill this field" title="Must be a valid e-mail adress">
                                     <br>
-                                    <input type="password" class="form-control " id="singUpPassw" placeholder="Password" data-toggle="popoverPassword" data-placement="bottom" data-content="You need to fill this field" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters">
+                                    <input type="password" class="form-control " id="singUpPassw" placeholder="Password" data-toggle="popoverPassword" data-placement="bottom"
+                                        data-content="You need to fill this field">
                                     <br>
                                     <div class="d-flex justify-content-between">
-                                        <button type="button" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>
+                                        <button type="submit" id="singUpBtn" class="btn btn-success btn-lg" onclick="singUp()">SING UP</button>
                                         <button type="reset" id="resetUpBtn" class="btn btn-danger btn-lg">RESET</button>
                                     </div>
                                     <meter max="4" id="password-strenght-meter"></meter>
