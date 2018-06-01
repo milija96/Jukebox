@@ -14,6 +14,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/zxcvbn/4.2.0/zxcvbn.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.2/pagination.js"></script>
     <link rel="shortcut icon" href="">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-bootpag/1.0.4/jquery.bootpag.js"></script>
     <script src="js/audioplayer.js"></script>
     <script src="main.js"></script>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -110,10 +112,10 @@
                     <h2>Juke box</h2>
                     <br>
                     <span>
-                        <a href="#" id="punk" onclick="openPunk()">Punk /</a>
-                        <a href="#" id="rock" onclick="openRock()">Rock /</a>
-                        <a href="#" id="narodna" onclick="openNarodna()">Narodna /</a>
-                        <a href="#" id="house" onclick="openHouse()">House</a>
+                        <a href="#" id="punk" onclick="displayByGanre()" rel="punk">Punk /</a>
+                        <a href="#" id="rock" onclick="displayByGanre()" rel="rock">Rock /</a>
+                        <a href="#" id="narodna" onclick="displayByGanre()" rel="narodna">Narodna </a>
+                        
                     </span>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
                         standard dummy text ever since the 1500s.</p>
@@ -181,7 +183,7 @@
             </div>
         </div>
         <div class="modal fade" id="sing-modal" tabindex="-1" role="dialog" aria-labelledby="sing-modal" aria-hidden="true">
-            <div class="modal-dialog modal-lg" id="sing-in-content">
+            <div class="modal-dialog " id="sing-in-content">
                 <div class="modal-content" id="singInModal">
                     <div class="container col-md-12 col-xs-12 col-lg-12">
                         <div class="col">

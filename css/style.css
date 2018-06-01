@@ -227,7 +227,6 @@ body{
 }
 .red{
     background: red;
-    color: white;
 }
 .blue{
     background: blue;
@@ -291,6 +290,16 @@ body{
     bottom: -5px;
     top: -2px;
 }
+
+
+
+#pagination-demo{
+    display: inline-block;
+    margin-bottom: 1.75em;
+  }
+  #pagination-demo li{
+    display: inline-block;
+  }
 
 
 meter {
@@ -399,5 +408,6 @@ meter[value="4"]::-moz-meter-bar { background: green; }
         max-height: 100%;
         margin-bottom: 10px;
     }
+
 
 }
