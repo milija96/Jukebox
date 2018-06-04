@@ -84,7 +84,7 @@ body{
     background-size: cover;
 }
 #carouselLinear{
-    width: 280px;
+    max-width: 100%;
 }
 #carouselLinear img{
     width: 280px;
@@ -423,5 +423,7 @@ meter[value="4"]::-moz-meter-bar { background: green; }
         top: 7px;
         left: 0px;
     }
-
+    #carouselLinear{
+        max-width: 100%;
+    }
 }
