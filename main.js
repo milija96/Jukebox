@@ -37,6 +37,7 @@ $(document).ready(function () {
     $('.navbar-nav>li>').on('click', function () {
         $('.navbar-collapse').collapse('hide');
     });
+
     $("#carousel").carousel({
         interval: 2000
     });
@@ -342,6 +343,7 @@ function displayArtists() {
     setTimeout(showSpiner, 0);
 
 
+
     empty = "";
     document.getElementById("elementi").innerHTML = empty;
     var xhttp = new XMLHttpRequest();
@@ -380,45 +382,46 @@ function displayArtists() {
 
 
         for (var i = 0; i < data.length; i++) {
-            output += '<tr id="musicRow" class=""><td>' + '<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + data[i].izvodjacId + ')">' + data[i].ime + "</td></tr>"
+            output += '<tr id="musicRow" class=""><td>' + '<i class="fa fa-music"></i></td><td onclick="selectedArtists(' + data[i].id + ')">' + data[i].ime + "</td></tr>"
         }
         function selectedArtists(id) {
-            
-            var artData = "<ul id='musicData'";
+            var artData = "<ul id='musicData'>";
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4 && this.status == 200) {
                     var dataR = JSON.parse(this.responseText);
                     displayArtists(dataR)
+                    console.log(dataR)
                 }
             }
             xhttp.open("GET", "http://192.168.0.58:8080/JukeboxWebService/webapi/izvodjaci/" + id + "/pesme", true);
             xhttp.send();
 
-            console.log(izvodjacId)
+            
             function displayArtists(dataR) {
-                console.log(dataR)
-                for (var i = 0; i < dataArt.length; i++) {
-                    artData += '<li>' + dataArt[i].izvodjacIme + ' <br><span id="music">' + dataArt[i].naziv + '</span></li><br><a id="musicButton" style="float: right" href="#" class="btn btn-success " data-toggle="modal" data-target="#basicModal" onclick="myData(' + i + ')"> Play it</a><br><br>';
+                var artData = "<ul id='musicData'>";
+                for (var i = 0; i < dataR.length; i++) {
+                    
+                    artData +=  "<li>"+ dataR[i].izvodjacIme + "<br><span id='music'>" + dataR[i].naziv + "</span></li><br><a id='musicButton' style='float: right' href='#' class='btn btn-success' data-toggle='modal' data-target='#basicModal' onclick='myData(" + i + ")'> Play it</a><br><br>";
                 }
-            }
-
+            
+            
             function myData(data) {
                 $("#project-wrapper").slideUp();
                 var plyArt = "<h4>";
                 var plyMus = "<h5>";
                 var modUser = "";
-                plyArt += dataArt[data].izvodjacIme;
-                plyMus += dataArt[data].naziv;
+                plyArt += dataR[data].izvodjacIme;
+                plyMus += dataR[data].naziv;
 
 
                 modData = "";
-                modData += dataArt[data].izvodjacIme + ": " + dataArt[data].naziv + "<br>Cena: " + dataArt[data].cenaKolicina + "din<br>You are logged as:" + modUser;
+                modData += dataR[data].izvodjacIme + ": " + dataR[data].naziv + "<br>Cena: " + dataR[data].cenaKolicina + "din<br>";
                 modBody.innerHTML = modData;
 
                 document.getElementById("buyIt").addEventListener("click", function () {
                     if (token !== null) {
-                        id = dataArt[data].id;
+                        id = dataR[data].id;
                         var xhttp = new XMLHttpRequest();
                         xhttp.onreadystatechange = function () {
                             if (this.readyState == 4 && this.status == 200) {
@@ -447,9 +450,12 @@ function displayArtists() {
                 })
 
             };
+        
             window.myData = myData;
             artData += "</ul>"
             elementi.innerHTML = artData;
+        }
+        
         }
         window.selectedArtists = selectedArtists;
         output += "</tr></table>";
@@ -605,6 +611,7 @@ function displayMusic() {
             var data = JSON.parse(this.responseText);
             myFunction(data);
             paginationN(data);
+            doIt(data);
         }
     };
     xhttp.open("GET", " http://192.168.0.58:8080/JukeboxWebService/webapi/pesme/pagination/" + page, true);
@@ -612,54 +619,42 @@ function displayMusic() {
 
 
 
-    var lsit = "<ul id='pagination-demo' class='pagination-sm'></ul>";
-
-
+    function doIt(data){
+        for (var i = 0; i < data.length; i++) {
+            pageNumb = data[i].brojStrana;
+        }
+        $('#pageList').twbsPagination({
+            totalPages: pageNumb,
+            visiblePages: 3,
+            first: false,
+            last: false,
+            onPageClick: function (event, page) {
+                pageData(page);
+            }
+        });
+    }
 
 
     remain();
 
     function paginationN(data) {
-        console.log("W")
+
+        var pageNum = "";
         for (var i = 0; i < data.length; i++) {
-            var pageNum = data[i].brojStrana;
+            pageNum = data[i].brojStrana;
         }
-        var next = "Next";
-        var prev = "Prev"
-        pageCont = "<ul id='pagination' class='pagination'><li  class='page-item'><a id='prev' class='page-link' onclick='prevPage()'>" + prev + "</a></li>"
+        var p = "<ul></ul>";
+        var pageCont = "<ul id='pageList' class='pagination'>";
         for (var i = 1; i <= pageNum; i++) {
             pageCont += "<li id='items' class='page-item' ><a class='page-link' onclick='pageData(" + i + ")'> " + i + "</a></li>";
         }
-        pageCont += "<li class='page-item'><a id='next' class='page-link' onclick='nextPage()'>" + next + "</a><li></ul>"
+
+        console.log(pageNum)
 
 
 
-
-        function prevPage() {
-            var prevNum;
-            if (page > 1) {
-                var prevNum;
-                prevNum = page - 1;
-                pageData(prevNum);
-            }
-            else if (page === 1) {
-                document.getElementById("prev").classList.add("disabled");
-            }
-        }
-        window.prevPage = prevPage;
-        function nextPage() {
-            console.log(pageNum)
-            if (page < pageNum) {
-                var nextNum;
-                nextNum = page + 1;
-                pageData(nextNum);
-            }
-            else if (page > pageNum) {
-                document.getElementById("next").classList.add("disabled");
-            }
-        }
-        window.nextPage = nextPage;
         function pageData(dataP) {
+            
             var curPageNum = dataP;
             localStorage.curPageNum = curPageNum;
             page = curPageNum;
